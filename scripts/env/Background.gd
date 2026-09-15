@@ -4,7 +4,7 @@ class_name  Background
 
 export(bool) var can_process
 
-export(Array, float) var layer_speed
+export(Array, int) var layer_speed
 
 func _ready():
 	if can_process() == false:

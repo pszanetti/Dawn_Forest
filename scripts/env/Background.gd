@@ -7,7 +7,7 @@ export(bool) var can_process
 export(Array, int) var layer_speed
 
 func _ready():
-	if can_process() == false:
+	if can_process == false:
 		set_physics_process(false)
 	
 func _physics_process(delta):

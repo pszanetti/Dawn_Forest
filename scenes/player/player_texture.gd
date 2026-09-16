@@ -22,6 +22,7 @@ func animate(direction: Vector2) -> void:
 		vertical_behaviour(direction)
 	elif player.landing:
 		animation.play("landing")
+		player.set_physics_process(false)
 	else:
 		horizontal_behaviour(direction)
 
@@ -53,4 +54,5 @@ func _on_animation_finished(anim_name: String) -> void:
 	match anim_name:
 		"landing":
 			player.landing = false
+			player.set_physics_process(true)
 

@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://scenes/player/player.gd"
+}, {
+"base": "Sprite",
+"class": "PlayerTexture",
+"language": "GDScript",
+"path": "res://scenes/player/player_texture.gd"
 } ]
 _global_script_class_icons={
 "Background": "",
-"Player": ""
+"Player": "",
+"PlayerTexture": ""
 }
 
 [application]

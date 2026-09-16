@@ -137,6 +137,7 @@ hframes = 8
 vframes = 11
 script = ExtResource( 3 )
 animation = NodePath("../Animation")
+player = NodePath("..")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 1 )
@@ -152,3 +153,5 @@ current = true
 limit_top = 0
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
+
+[connection signal="animation_finished" from="Animation" to="Texture" method="_on_animation_finished"]

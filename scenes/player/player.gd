@@ -5,6 +5,15 @@ class_name Player
 # Carrega o Node Texture !!!
 onready var player_sprite: Sprite = get_node("Texture")
 
+# Variáveis para o caso de personagem estiver na parede
+onready var wall_ray: RayCast2D = get_node("WallRay")
+export(int) var wall_jump_speed
+export(int) var wall_gravity
+export(int) var wall_impulse_speed
+var not_on_all: bool = true
+var on_wall: bool = false
+var direction: int = 1
+
 var velocity: Vector2
 var jump_count: int = 0
 var landing: bool =  false
@@ -46,14 +55,30 @@ func horizontal_movement_env() -> void:
 	player_sprite.animate(velocity)   #IMPORTANTE ESSA LINHA SUMIU !?
 
 func vertical_movement_env() -> void:
-	if is_on_floor():
+	if is_on_floor() or is_on_wall():
 		jump_count = 0
 	# para simplificar a comparação evitando linhas de código grandes
 	var jump_condition: bool = can_track_input and not attacking
 	# just_pressed, indica uma vez ó mesmo que a tecla espeço continue apertada
 	if Input.is_action_just_pressed("ui_select") and jump_count < 2 and jump_condition:
 		jump_count += 1
-		velocity.y = jump_speed
+		if next_to_wall() and not is_on_floor():
+			velocity.y = wall_jump_speed
+			velocity.x += wall_impulse_speed * direction
+		else:
+			velocity.y = jump_speed
+
+func next_to_wall():
+	if wall_ray.is_colliding() and not is_on_floor():
+		if not_on_all:
+			velocity.y = 0
+			not_on_all = false
+		return true
+	
+	else:
+		not_on_all = true
+		return false
+	
 
 
 # Função responsável pelo ataque, agachar e defender
@@ -91,8 +116,14 @@ func defense() -> void:
 	
 # Aplica a Gravidade
 func gravity(delta) -> void:
-	velocity.y += player_gravity * delta
-	if velocity.y >= player_gravity:
-		velocity.y = player_gravity
+	if next_to_wall():
+		velocity.y += wall_gravity * delta
+		if velocity.y >= wall_gravity:
+			velocity.y = wall_gravity
+			
+	else:
+		velocity.y += player_gravity * delta
+		if velocity.y >= player_gravity:
+			velocity.y = player_gravity
 		
 

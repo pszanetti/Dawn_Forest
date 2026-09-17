@@ -26,7 +26,8 @@ func animate(direction: Vector2) -> void:
 # print(direction) checar se está recebendo o velocity
 
 	verify_direction(direction)
-	if player.attacking or player.defending or player.crouching:
+	# next_to_wall() função no script do node Player
+	if player.attacking or player.defending or player.crouching or player.next_to_wall():
 		action_behaviour()
 	elif direction.y != 0:
 		vertical_behaviour(direction)
@@ -38,7 +39,9 @@ func animate(direction: Vector2) -> void:
 		
 # Verifica se vai atacar ou defender ou agachar (crouch)
 func action_behaviour() -> void:
-	if player.attacking and normal_attack:
+	if player.next_to_wall():
+		animation.play("wall_slide")
+	elif player.attacking and normal_attack:
 		animation.play("attack" + suffix)
 	elif player.defending and shield_off:
 		animation.play("shield")
@@ -53,9 +56,15 @@ func verify_direction(direction: Vector2) -> void:
 	if direction.x > 0:
 		flip_h = false
 		suffix = "_right"
+		player.direction = -1
+		direction = Vector2.ZERO
+		player.wall_ray.cast_to = Vector2( 5.5, 0)
 	elif direction.x < 0:
 		flip_h = true
 		suffix = "_left"
+		player.direction = 1
+		direction = Vector2(-2, 0)
+		player.wall_ray.cast_to = Vector2( -7.5, 0)
 
 func vertical_behaviour(direction: Vector2) -> void:
 	# Se direção de y > 0 está caindo, animação fall

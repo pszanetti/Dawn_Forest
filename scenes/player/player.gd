@@ -68,7 +68,7 @@ func vertical_movement_env() -> void:
 		else:
 			velocity.y = jump_speed
 
-func next_to_wall():
+func next_to_wall() -> bool:
 	if wall_ray.is_colliding() and not is_on_floor():
 		if not_on_all:
 			velocity.y = 0

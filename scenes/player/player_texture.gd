@@ -2,6 +2,15 @@ extends Sprite
 
 class_name PlayerTexture
 
+# Ataque normal é o ataque com espada
+var normal_attack: bool = false
+
+# Define o lado em que está atacando,a animação attack_right
+var suffix: String = "_right"
+
+#Verifica se o shield (defesa) e o crouch (agachar) estão desabilitados
+var shield_off: bool = false
+var crouch_off: bool = false
 # Aqui eu pego o path e altero a variável animation para guardar o 
 # Node cujo caminho estava descrito animation e guardo como Node tipo AnimationPlayer
 
@@ -17,20 +26,36 @@ func animate(direction: Vector2) -> void:
 # print(direction) checar se está recebendo o velocity
 
 	verify_direction(direction)
-	
-	if direction.y != 0:
+	if player.attacking or player.defending or player.crouching:
+		action_behaviour()
+	elif direction.y != 0:
 		vertical_behaviour(direction)
 	elif player.landing:
 		animation.play("landing")
 		player.set_physics_process(false)
 	else:
 		horizontal_behaviour(direction)
-
+		
+# Verifica se vai atacar ou defender ou agachar (crouch)
+func action_behaviour() -> void:
+	if player.attacking and normal_attack:
+		animation.play("attack" + suffix)
+	elif player.defending and shield_off:
+		animation.play("shield")
+		shield_off = false
+	elif player.crouching and crouch_off:
+		animation.play("crouch")
+		crouch_off = false
+	pass
+	
+# Função para verificar se o player está apontando para a direita ou esquerda
 func verify_direction(direction: Vector2) -> void:
 	if direction.x > 0:
 		flip_h = false
+		suffix = "_right"
 	elif direction.x < 0:
 		flip_h = true
+		suffix = "_left"
 
 func vertical_behaviour(direction: Vector2) -> void:
 	# Se direção de y > 0 está caindo, animação fall
@@ -55,4 +80,13 @@ func _on_animation_finished(anim_name: String) -> void:
 		"landing":
 			player.landing = false
 			player.set_physics_process(true)
+		"attack_left":
+			normal_attack = false
+			player.attacking = false 
+			pass
+		"attack_right":
+			normal_attack = false
+			player.attacking = false
+			
+			pass
 

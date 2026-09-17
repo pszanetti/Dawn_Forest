@@ -9,6 +9,14 @@ var velocity: Vector2
 var jump_count: int = 0
 var landing: bool =  false
 
+# Variáveis responsáveis por ataque, defesa e agachar 
+# E que bloqueiam as funções de pulo e movimento lateral
+var attacking: bool = false
+var defending: bool = false
+var crouching: bool = false
+# Variável que desbloqueia outras funções
+var can_track_input: bool = true
+
 export(int) var speed
 
 export(int) var jump_speed
@@ -17,7 +25,11 @@ export(int) var player_gravity
 func _physics_process(delta):
 	horizontal_movement_env()
 	vertical_movement_env()
-
+	
+# Função responsável pelo ataque, agachar e defender
+	actions_env()
+	
+# Função responsável por aplicar a gravidade
 	gravity(delta)
 	
 	# IMPORTANTE: se não colocar Vector.UP is_on_floor serṕá sempre falso
@@ -26,22 +38,61 @@ func _physics_process(delta):
 	
 func horizontal_movement_env() -> void:
 	var input_direction: float = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	if can_track_input == false or attacking:
+		velocity.x =0
+		return    # -> o return serve para não rodar o código que está abaixo, saindo assim da função
 	velocity.x = input_direction * speed
 	# IMPORTANTE -> animate será um metódo criado no script em Texture !!!
-	player_sprite.animate(velocity)
+	player_sprite.animate(velocity)   #IMPORTANTE ESSA LINHA SUMIU !?
 
 func vertical_movement_env() -> void:
 	if is_on_floor():
 		jump_count = 0
+	# para simplificar a comparação evitando linhas de código grandes
+	var jump_condition: bool = can_track_input and not attacking
 	# just_pressed, indica uma vez ó mesmo que a tecla espeço continue apertada
-	if Input.is_action_just_pressed("ui_select") and jump_count < 2:
+	if Input.is_action_just_pressed("ui_select") and jump_count < 2 and jump_condition:
 		jump_count += 1
 		velocity.y = jump_speed
-		pass
-	pass
+
+
+# Função responsável pelo ataque, agachar e defender
+func actions_env() -> void:
+	attack()
+	crouch()
+	defense()
+		
+func attack() -> void:
+	var attack_condition: bool = not attacking and not crouching and not defending
+	if Input.is_action_just_pressed("Attack") and attack_condition and is_on_floor():
+		attacking = true
+		player_sprite.normal_attack = true
+		pass	
+		
+		
+func crouch() -> void:
+	if Input.is_action_pressed("Crouch") and is_on_floor() and not defending:
+		crouching = true
+		can_track_input = false
+	elif not defending:
+		crouching = false
+		can_track_input = true
+		player_sprite.crouch_off = true
 	
+	
+func defense() -> void:
+	if Input.is_action_pressed("Defense") and is_on_floor() and not crouching:
+		defending = true
+		can_track_input = false
+	elif not crouching:
+		defending = false
+		can_track_input = true
+		player_sprite.shield_off = true
+	
+# Aplica a Gravidade
 func gravity(delta) -> void:
 	velocity.y += player_gravity * delta
 	if velocity.y >= player_gravity:
 		velocity.y = player_gravity
 		
+

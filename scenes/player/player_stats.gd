@@ -23,6 +23,9 @@ var bonus_defense: int = 0
 var current_health: int
 var current_mana: int
 
+# Guarda o valor da experiência adquirida pelo personagem
+var current_exp: int = 0
+
 # Soma da mana base + a mana bonus
 var max_mana: int
 # Soma da health base + a health bonus
@@ -50,4 +53,22 @@ func _ready() -> void:
 	current_mana = base_mana + bonus_mana
 	max_mana = current_mana
 	
+# Atualizando a experiencia
+func update_exp(value: int) -> void:
+	current_exp += value
+	if current_exp >= level_dict[str(level)] and level < 9:
+		# Sobra ou resto da experiência
+		var lefover: int = current_exp - level_dict[str(level)]
+		current_exp = lefover
+		# Incrementando o level do personagem
+		on_level_up()
+		level += 1
+		# Checando se chegou no nível máximo sendo o level 9 o máximo no level_dict
+	elif current_exp >= level_dict[str(level)] and level == 9: 
+		current_exp = level_dict[str(level)]
+		
+		
+func on_level_up() -> void:
+	current_health = base_health + bonus_health
+	current_mana = base_mana + bonus_mana
 	pass

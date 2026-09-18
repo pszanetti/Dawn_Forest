@@ -20,14 +20,19 @@ export(NodePath) onready var animation = get_node(animation) as AnimationPlayer
 # Guarda o acesso ao node Player na variável player para acessar suas variáveis e funções
 export(NodePath) onready var player = get_node(player) as KinematicBody2D
 
+# Guarda informções sobre o CollisiobShape dentro do Node AttackArea
+export(NodePath) onready var attack_collision = get_node(attack_collision) as CollisionShape2D
+
 # Recebe o valor de velocity que está no script do Node raiz (Player) e armazena
 # na variável direction
 func animate(direction: Vector2) -> void:
 # print(direction) checar se está recebendo o velocity
-
 	verify_direction(direction)
+	if player.on_hit or player.dead:
+		hit_behaviour()
+		pass
 	# next_to_wall() função no script do node Player
-	if player.attacking or player.defending or player.crouching or player.next_to_wall():
+	elif player.attacking or player.defending or player.crouching or player.next_to_wall():
 		action_behaviour()
 	elif direction.y != 0:
 		vertical_behaviour(direction)
@@ -65,7 +70,16 @@ func verify_direction(direction: Vector2) -> void:
 		player.direction = 1
 		direction = Vector2(-2, 0)
 		player.wall_ray.cast_to = Vector2( -7.5, 0)
-
+		
+func hit_behaviour() -> void:
+	player.set_physics_process(false)
+	# set_deferred serve para acessar imediatamente as propriedades de certos Nodes
+	attack_collision.set_deferred("disabled", true)	# Desabilitando a detecção da colisão do ataque
+	if player.dead:
+		animation.play("dead")
+	elif player.on_hit:
+		animation.play("hit")
+	
 func vertical_behaviour(direction: Vector2) -> void:
 	# Se direção de y > 0 está caindo, animação fall
 	if direction.y > 0:
@@ -97,5 +111,14 @@ func _on_animation_finished(anim_name: String) -> void:
 			normal_attack = false
 			player.attacking = false
 			
+		"hit":
+			player.on_hit = false
+			player.set_physics_process(true)
+			
+			if player.defending:
+				animation.play("shield")
+				
+			if player.crouching:
+				animation.play("crouch")
 			pass
 

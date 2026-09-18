@@ -96,10 +96,9 @@ func update_health(type: String, value: int) -> void:
 func verify_shield(value: int) -> void:
 	if shielding:
 		if (base_defense + bonus_defense) >= value:
-			
 			return # Sai sa função verify_shield
-			
-		var damage = abs (base_defense + bonus_defense) - value
+		#print(" acabou a defesa")
+		var damage = abs ((base_defense + bonus_defense) - value)
 		current_health -= damage
 		
 	else:
@@ -117,5 +116,10 @@ func update_mana(type: String, value: int) -> void:
 			current_mana -= value
 			
 			
-			
+# Função para teste de dano e morte
+# Sempre que apertar "espaço" irá causar 5 de dano
+func _process(delta):
+	if Input.is_action_just_pressed("ui_select"):
+		update_health("Decrease", 5)
+	pass
 			

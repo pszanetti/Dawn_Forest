@@ -140,12 +140,9 @@ func on_collision_area_entered(area):
 		# Cada inimigo darṕá um tempo de recuperação (invencibility)
 		invencibility_timer.start(area.invencibility_timer)
 		
-		pass
-	pass # Replace with function body.
-
-
 func on_invencibility_timer_timeout():
 	# Retorna o monitoramento de dano
 	collision_area.set_deferred("monitoring", true)
 	
-	pass # Replace with function body.
+	
+	

@@ -100,4 +100,16 @@ func verify_shield(value: int) -> void:
 		current_health -= value
 	
 	
-
+func update_mana(type: String, value: int) -> void:
+	match type:
+		"Increase":
+			current_mana += value
+			if current_mana >= max_mana:
+				current_mana = max_mana
+			pass
+		"Decrease":
+			current_mana -= value
+			
+			
+			
+			

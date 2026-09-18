@@ -48,6 +48,11 @@ var level_dict: Dictionary = {
 	
 # Guarda o acesso ao node Player na variável player para acessar suas variáveis e funções
 export(NodePath) onready var player = get_node(player) as KinematicBody2D
+# Guardar o acesso a area de colisão que irá sofrer dano
+export(NodePath) onready var collision_area = get_node(collision_area) as Area2D
+
+# Carregando o Timer de invencibilidade
+onready var invencibility_timer = get_node("InvencibilityTimer")
 
 func _ready() -> void:
 	current_health = base_health + bonus_health
@@ -124,3 +129,23 @@ func _process(delta):
 	pass
 
 			
+
+
+func on_collision_area_entered(area):
+	if area.name =="EnemyAttackArea":
+		# Cada inimigo dará um dano x (damage)
+		update_health("Decrease", area.damage)
+		# Desabilitando a area responsável por receber dano
+		collision_area.set_deferred("monitoring", false)
+		# Cada inimigo darṕá um tempo de recuperação (invencibility)
+		invencibility_timer.start(area.invencibility_timer)
+		
+		pass
+	pass # Replace with function body.
+
+
+func on_invencibility_timer_timeout():
+	# Retorna o monitoramento de dano
+	collision_area.set_deferred("monitoring", true)
+	
+	pass # Replace with function body.

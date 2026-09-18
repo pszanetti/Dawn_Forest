@@ -42,7 +42,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("AttackArea/CollisionShape2D:shape")
+tracks/2/path = NodePath("AttackArea/Collision:shape")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -54,7 +54,7 @@ tracks/2/keys = {
 "values": [ SubResource( 9 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("AttackArea/CollisionShape2D:shape:extents")
+tracks/3/path = NodePath("AttackArea/Collision:shape:extents")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -66,7 +66,7 @@ tracks/3/keys = {
 "values": [ Vector2( 10, 10 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("AttackArea/CollisionShape2D:position")
+tracks/4/path = NodePath("AttackArea/Collision:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -78,7 +78,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("AttackArea/CollisionShape2D:disabled")
+tracks/5/path = NodePath("AttackArea/Collision:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -106,7 +106,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AttackArea/CollisionShape2D:shape")
+tracks/1/path = NodePath("AttackArea/Collision:shape")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -118,7 +118,7 @@ tracks/1/keys = {
 "values": [ SubResource( 9 ), SubResource( 9 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("AttackArea/CollisionShape2D:shape:extents")
+tracks/2/path = NodePath("AttackArea/Collision:shape:extents")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -130,7 +130,7 @@ tracks/2/keys = {
 "values": [ Vector2( 21.5, 8.5 ), Vector2( 16, 8.5 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("AttackArea/CollisionShape2D:position")
+tracks/3/path = NodePath("AttackArea/Collision:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -142,7 +142,7 @@ tracks/3/keys = {
 "values": [ Vector2( -6.5, 5.5 ), Vector2( -3, 10.5 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("AttackArea/CollisionShape2D:disabled")
+tracks/4/path = NodePath("AttackArea/Collision:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -170,7 +170,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AttackArea/CollisionShape2D:shape")
+tracks/1/path = NodePath("AttackArea/Collision:shape")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -182,7 +182,7 @@ tracks/1/keys = {
 "values": [ SubResource( 9 ), SubResource( 9 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("AttackArea/CollisionShape2D:shape:extents")
+tracks/2/path = NodePath("AttackArea/Collision:shape:extents")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -194,7 +194,7 @@ tracks/2/keys = {
 "values": [ Vector2( 21.5, 8.5 ), Vector2( 16, 8.5 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("AttackArea/CollisionShape2D:position")
+tracks/3/path = NodePath("AttackArea/Collision:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -206,7 +206,7 @@ tracks/3/keys = {
 "values": [ Vector2( 4.5, 5.5 ), Vector2( 1, 11 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("AttackArea/CollisionShape2D:disabled")
+tracks/4/path = NodePath("AttackArea/Collision:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -449,6 +449,7 @@ jump_speed = -175
 player_gravity = 350
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -1, 12.5 )
 shape = SubResource( 8 )
 
@@ -459,7 +460,7 @@ vframes = 11
 script = ExtResource( 3 )
 animation = NodePath("../Animation")
 player = NodePath("..")
-attack_collision = NodePath("../AttackArea/CollisionShape2D")
+attack_collision = NodePath("../AttackArea/Collision")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 1 )
@@ -485,7 +486,7 @@ drag_margin_v_enabled = true
 
 [node name="AttackArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+[node name="Collision" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource( 9 )
 disabled = true
 
@@ -506,5 +507,17 @@ anims/light_animation = SubResource( 16 )
 [node name="Stats" type="Node" parent="."]
 script = ExtResource( 5 )
 player = NodePath("..")
+collision_area = NodePath("../CollisionArea")
+
+[node name="InvencibilityTimer" type="Timer" parent="Stats"]
+one_shot = true
+
+[node name="CollisionArea" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="CollisionArea"]
+position = Vector2( -1, 12.5 )
+shape = SubResource( 8 )
 
 [connection signal="animation_finished" from="Animation" to="Texture" method="_on_animation_finished"]
+[connection signal="timeout" from="Stats/InvencibilityTimer" to="Stats" method="on_invencibility_timer_timeout"]
+[connection signal="area_entered" from="CollisionArea" to="Stats" method="on_collision_area_entered"]

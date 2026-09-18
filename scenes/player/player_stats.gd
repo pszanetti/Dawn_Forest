@@ -45,6 +45,9 @@ var level_dict: Dictionary = {
 	"8": 251,
 	"9": 356
 	}
+	
+# Guarda o acesso ao node Player na variável player para acessar suas variáveis e funções
+export(NodePath) onready var player = get_node(player) as KinematicBody2D
 
 func _ready() -> void:
 	current_health = base_health + bonus_health
@@ -82,9 +85,12 @@ func update_health(type: String, value: int) -> void:
 		"Decrease":
 			verify_shield(value)
 			if current_health <= 0:
-				pass # Chama a animação de morte
+				player.dead = true
+				# Chama a animação de morte
 			else:
-				pass # Chama aniamação de dano
+				player.on_hit = true
+				player.attacking = false
+				# Chama aniamação de dano e bloqueia o ataque
 			pass
 		
 func verify_shield(value: int) -> void:

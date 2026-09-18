@@ -7,6 +7,10 @@ onready var player_sprite: Sprite = get_node("Texture")
 
 # Variáveis para o caso de personagem estiver na parede
 onready var wall_ray: RayCast2D = get_node("WallRay")
+# Acessa o node Stats e seus atributos:
+onready var stats: Node = get_node("Stats")
+
+
 export(int) var wall_jump_speed
 export(int) var wall_gravity
 export(int) var wall_impulse_speed
@@ -25,6 +29,10 @@ var defending: bool = false
 var crouching: bool = false
 # Variável que desbloqueia outras funções
 var can_track_input: bool = true
+
+# Variáveis para dano 
+var dead: bool = false
+var on_hit: bool = false
 
 export(int) var speed
 
@@ -99,20 +107,24 @@ func crouch() -> void:
 	if Input.is_action_pressed("Crouch") and is_on_floor() and not defending:
 		crouching = true
 		can_track_input = false
+		stats.shielding = false
 	elif not defending:
 		crouching = false
 		can_track_input = true
 		player_sprite.crouch_off = true
+		stats.shielding = false
 	
 	
 func defense() -> void:
 	if Input.is_action_pressed("Defense") and is_on_floor() and not crouching:
 		defending = true
 		can_track_input = false
+		stats.shielding = true
 	elif not crouching:
 		defending = false
 		can_track_input = true
 		player_sprite.shield_off = true
+		stats.shielding = false	# Não está na defesa
 	
 # Aplica a Gravidade
 func gravity(delta) -> void:

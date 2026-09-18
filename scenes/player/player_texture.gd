@@ -23,6 +23,9 @@ export(NodePath) onready var player = get_node(player) as KinematicBody2D
 # Guarda informções sobre o CollisiobShape dentro do Node AttackArea
 export(NodePath) onready var attack_collision = get_node(attack_collision) as CollisionShape2D
 
+# Emitir sinal para os levels
+signal game_over
+
 # Recebe o valor de velocity que está no script do Node raiz (Player) e armazena
 # na variável direction
 func animate(direction: Vector2) -> void:
@@ -121,4 +124,7 @@ func _on_animation_finished(anim_name: String) -> void:
 			if player.crouching:
 				animation.play("crouch")
 			pass
-
+			
+		"dead":
+			emit_signal("game_over")
+			

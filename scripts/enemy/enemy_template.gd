@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	gravity(delta)
 	move_behaviour()
 	verify_position()
-	#texture.animate(velocity)
+	texture.animate(velocity)
 	velocity = move_and_slide(velocity, Vector2.UP)
 		
 	

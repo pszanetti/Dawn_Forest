@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/resources/floor.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/env/mask.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/resources/small_decoration_tile.tres" type="TileSet" id=5]
 [ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/management/level.gd" type="Script" id=7]
+[ext_resource path="res://scenes/enemy/whale.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -45,7 +46,10 @@ visible = false
 color = Color( 0.466667, 0.466667, 0.466667, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
-position = Vector2( 103, 66 )
+position = Vector2( 36, 65 )
 
 [node name="Environment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
+
+[node name="Whale" parent="." instance=ExtResource( 8 )]
+position = Vector2( 422, 97 )

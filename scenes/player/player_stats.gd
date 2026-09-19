@@ -123,10 +123,10 @@ func update_mana(type: String, value: int) -> void:
 			
 # Função para teste de dano e morte
 # Sempre que apertar "espaço" irá causar 5 de dano
-func _process(delta):
-	if Input.is_action_just_pressed("ui_select"):
-		update_health("Decrease", 5)
-	pass
+#func _process(delta):
+#	if Input.is_action_just_pressed("ui_select"):
+#		update_health("Decrease", 5)
+#	pass
 
 			
 

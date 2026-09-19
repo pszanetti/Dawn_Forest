@@ -5,7 +5,23 @@ extends EnemyTexture
 class_name WhaleTexture
 
 func animate(velocity: Vector2) -> void:
-	move_behaviour(velocity)
+	# Essas variáveis can_hit e can_diejá estão no EnemyTemplate
+	# inclusive o acesso ao raiz enemy que é o KinemmaticBody2d EnemyTemplate
+	if enemy.can_hit or enemy.can_die:
+		action_behaviour()
+	else:
+		move_behaviour(velocity)
+	
+func action_behaviour() -> void:
+	if enemy.can_die:
+		animation.play("dead")
+		enemy.can_hit = false
+		enemy.can_attack = false
+	elif enemy.can_hit:
+		print("Entrou")
+		animation.play("hit")
+		enemy.can_attack = false
+		
 	pass
 	
 func move_behaviour(velocity: Vector2) -> void:
@@ -15,4 +31,17 @@ func move_behaviour(velocity: Vector2) -> void:
 	else:
 		# Chama o animation padrão da cena herdada -> EnemyTexture e executa a animação idle
 		animation.play("idle")
+
+func on_animation_finished(anim_name: String) -> void:
+	match anim_name:
+		"hit":
+			print("Entrou no final da animação hit ")
+			enemy.can_hit = false
+			enemy.set_physics_process(true)
+		"dead":
+			print("Entrou no final da animação dead ")
+			enemy.kill_enemy() # A ser implementado
+			pass
+	
 	pass
+

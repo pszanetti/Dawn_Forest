@@ -89,6 +89,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath(".:collision_layer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4 ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "attack_left"
@@ -248,6 +260,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:collision_layer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=5]

@@ -15,6 +15,9 @@ var can_attack: bool = false
 var velocity: Vector2
 var player_ref: Player = null
 
+# Preparando a lista para itens que serão dropados
+var drop_list: Dictionary
+
 export(int) var speed 
 export(int) var gravity_speed
 export(int) var proximity_threshold

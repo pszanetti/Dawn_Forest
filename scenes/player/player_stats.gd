@@ -86,8 +86,8 @@ func update_health(type: String, value: int) -> void:
 			current_health += value
 			if current_health >= max_health:
 				current_health = max_health
-			pass
 		"Decrease":
+#			print("Entrou !? ", current_health)
 			verify_shield(value)
 			if current_health <= 0:
 				player.dead = true
@@ -105,6 +105,7 @@ func verify_shield(value: int) -> void:
 		#print(" acabou a defesa")
 		var damage = abs ((base_defense + bonus_defense) - value)
 		current_health -= damage
+#		print("Entrou !? ", current_health)
 		
 	else:
 		current_health -= value
@@ -132,6 +133,7 @@ func update_mana(type: String, value: int) -> void:
 
 
 func on_collision_area_entered(area):
+#	print(area.name)
 	if area.name =="EnemyAttackArea":
 		# Cada inimigo dará um dano x (damage)
 		update_health("Decrease", area.damage)

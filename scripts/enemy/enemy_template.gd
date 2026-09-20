@@ -94,7 +94,7 @@ func spawn_item_probability() -> void:
 		
 		if rng <= drop_list[key][1] * drop_bonus:
 			# Armazena a imagem png do item que está no indíce 0 da chave
-			var intem_texture: StreamTexture = load(drop_list[key][0])     
+			var item_texture: StreamTexture = load(drop_list[key][0])     
 			# Guarda demais informações do item
 			var item_info: Array = [
 				drop_list[key][0],
@@ -103,9 +103,8 @@ func spawn_item_probability() -> void:
 				drop_list[key][4],
 				1                 # -> Quantidade do array
 				]
-				
-			pass
+			spawn_physic_item(key, item_texture, item_info)
 		
-		pass
-
-
+func spawn_physic_item(key: String, item_texture: StreamTexture, item_info: Array) -> void:
+	
+	pass

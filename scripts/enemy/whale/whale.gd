@@ -8,7 +8,7 @@ func _ready() -> void:
 	
 	# Populando a lista de Drop
 	drop_list = {
-		"Heal Potion" : [
+		"Heal Potion" : [                                      # Chave do Item
 			"res://assets/item/consumable/health_potion.png",  # -> Path do png do item
 			20,   # -> Probabilidade de Drop
 			"Health",  # -> Tipo do Item

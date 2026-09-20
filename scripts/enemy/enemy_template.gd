@@ -17,6 +17,8 @@ var player_ref: Player = null
 
 # Preparando a lista para itens que serão dropados
 var drop_list: Dictionary
+# Multiplicador de Drop dos Itens
+var drop_bonus: int = 1
 
 export(int) var speed 
 export(int) var gravity_speed
@@ -70,6 +72,40 @@ func verify_position() -> void:
 		
 func kill_enemy() -> void:
 	animation.play("kill")
-	pass
+	spawn_item_probability()
 	
 	
+# Método para dropar os itens
+
+func spawn_item_probability() -> void:
+	var random_number: int = randi() % 21
+	if random_number < 6:
+		drop_bonus = 1
+	elif random_number > 6 and drop_bonus < 14:
+		drop_bonus = 2
+	else:
+		drop_bonus = 3
+		
+	print ("Multiplicador de Drop" + str(drop_bonus))
+	
+	for key in drop_list.keys():
+		# Sorteando os itens
+		var rng:int = randi() % 100 + 1    # -> o "+1" é para o número sair entre 1 e 100 
+		
+		if rng <= drop_list[key][1] * drop_bonus:
+			# Armazena a imagem png do item que está no indíce 0 da chave
+			var intem_texture: StreamTexture = load(drop_list[key][0])     
+			# Guarda demais informações do item
+			var item_info: Array = [
+				drop_list[key][0],
+				drop_list[key][2],
+				drop_list[key][3],
+				drop_list[key][4],
+				1                 # -> Quantidade do array
+				]
+				
+			pass
+		
+		pass
+
+

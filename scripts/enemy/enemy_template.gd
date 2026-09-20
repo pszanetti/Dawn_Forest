@@ -65,6 +65,8 @@ func verify_position() -> void:
 			texture.flip_h = false
 			floor_ray.position.x = raycast_default_position
 		
-		
+func kill_enemy() -> void:
+	animation.play("kill")
+	pass
 	
 	

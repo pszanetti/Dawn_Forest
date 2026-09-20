@@ -41,7 +41,8 @@ func on_animation_finished(anim_name: String) -> void:
 		"dead":
 			print("Entrou no final da animação dead ")
 			enemy.kill_enemy() # A ser implementado
-			pass
+		"kill":
+			enemy.queue_free()
+		
 	
-	pass
 

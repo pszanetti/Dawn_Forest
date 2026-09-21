@@ -12,6 +12,11 @@ var item_name: String
 var item_info_list: Array
 var item_texture: StreamTexture
 
+# Contante para carregar o efeito de enviar ao inventário -> pegar o item dropado
+const COLLECT_EFFECT: PackedScene = preload("res://scenes/effect/general_effect/collect_item.tscn")
+# IMPORTANTE -> preload carrega antes de executar o jogo
+# é semelhante a onready var
+
 func _ready() -> void:
 	randomize()
 	aplly_random_impulse()
@@ -24,7 +29,7 @@ func aplly_random_impulse() -> void:
 		Vector2.ZERO,
 		Vector2( 
 			rand_range(-60, 60), # -> Angulo do impulso
-			-100                  # -> Altura
+			-90                  # -> Altura
 			)
 	)
 	
@@ -55,6 +60,13 @@ func on_body_exited(_body):   # -> Coloca underscore "_" para dizer que não vam
 func _process(_delta) -> void:
 	if player_ref != null and Input.is_action_just_released("interact"):
 		# Emitir sinal para enviar o item ao inventário
-		
+		spawn_effect()
 		queue_free()
 		pass
+
+func spawn_effect() -> void:
+	var collect_effect: EffectTemplate = COLLECT_EFFECT.instance()
+	get_tree().root.call_deferred("add_child", collect_effect)
+	collect_effect.global_position = global_position
+	collect_effect.play_effetc()
+	

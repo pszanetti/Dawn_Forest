@@ -140,6 +140,7 @@ func gravity(delta) -> void:
 		
 func spawn_effect(effect_path: String, offset: Vector2, is_flipped: bool) -> void:
 	# OffSet é para saber se é para direita ou esquerda que  é definido em is_flipped
+	#var effect_instance: EffectTemplate = load(effect_path).instance()
 	var effect_instance: EffectTemplate = load(effect_path).instance()
 	get_tree().root.call_deferred("add_child", effect_instance)
 	if is_flipped:

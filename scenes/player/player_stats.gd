@@ -60,6 +60,9 @@ func _ready() -> void:
 	
 	current_mana = base_mana + bonus_mana
 	max_mana = current_mana
+	# Acessando o Barra de Vida, mana e experiência
+	# Acessando a função init_bar e enviando os valores
+	get_tree().call_group("bar_container", "init_bar", max_health, max_mana, level_dict[str(level)])
 	
 # Atualizando a experiencia
 func update_exp(value: int) -> void:

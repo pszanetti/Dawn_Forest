@@ -108,8 +108,9 @@ func update_health(type: String, value: int) -> void:
 				player.on_hit = true
 				player.attacking = false
 				# Chama aniamação de dano e bloqueia o ataque
-			pass
-		
+	get_tree().call_group("bar_container", "update_bar", "HealthBar", current_health)
+	
+	
 func verify_shield(value: int) -> void:
 	if shielding:
 		if (base_defense + bonus_defense) >= value:
@@ -133,7 +134,7 @@ func update_mana(type: String, value: int) -> void:
 		"Decrease":
 			current_mana -= value
 			
-			
+	get_tree().call_group("bar_container", "update_bar", "ManaBar", current_mana)
 # Função para teste de dano e morte
 # Sempre que apertar "espaço" irá causar 5 de dano
 #func _process(delta):

@@ -4,7 +4,8 @@ class_name PlayerTexture
 
 # Ataque normal é o ataque com espada
 var normal_attack: bool = false
-
+# Ataque Mágico
+var magic_attack: bool = false
 # Define o lado em que está atacando,a animação attack_right
 var suffix: String = "_right"
 
@@ -51,6 +52,8 @@ func action_behaviour() -> void:
 		animation.play("wall_slide")
 	elif player.attacking and normal_attack:
 		animation.play("attack" + suffix)
+	elif player.attacking and magic_attack:
+		animation.play("spell_attack")
 	elif player.defending and shield_off:
 		animation.play("shield")
 		shield_off = false
@@ -130,4 +133,10 @@ func _on_animation_finished(anim_name: String) -> void:
 			
 		"dead":
 			emit_signal("game_over")
+			
+		"spell_attack":
+			print("Fim da magica")
+			magic_attack = false
+			player.attacking = false
+			
 			

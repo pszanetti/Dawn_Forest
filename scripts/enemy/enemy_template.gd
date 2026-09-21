@@ -24,6 +24,8 @@ export(int) var speed
 export(int) var gravity_speed
 export(int) var proximity_threshold
 export(int) var raycast_default_position
+# Quanto o inimigo dará de experiência caso o derrote
+export(int) var enemy_exp
 
 func _physics_process(delta: float) -> void:
 	gravity(delta)
@@ -72,6 +74,8 @@ func verify_position() -> void:
 		
 func kill_enemy() -> void:
 	animation.play("kill")
+	# Envia a experiência para o player
+	get_tree().call_group("player_stats", "update_exp", enemy_exp)
 	spawn_item_probability()
 	
 	

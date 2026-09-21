@@ -39,7 +39,6 @@ margin_left = 15.0
 margin_top = 7.0
 margin_right = 47.0
 margin_bottom = 8.0
-value = 100.0
 texture_progress = ExtResource( 5 )
 
 [node name="ExpBarBackgroud" type="TextureRect" parent="."]

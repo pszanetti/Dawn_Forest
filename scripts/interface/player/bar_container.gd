@@ -60,7 +60,13 @@ func update_bar(type: String, value: int) -> void:
 			call_tween(exp_bar, current_exp, value)
 			current_exp = value
 			pass
-	pass
+	
+func reset_exp_bar(max_exp: int, value: int) -> void:
+	exp_bar.max_value = max_exp
+	exp_bar.value = value
+	current_exp = value
+	# Atualizando a Barra de Experiencia
+	call_tween(exp_bar, 0, current_exp)
 	
 func call_tween(bar: TextureProgress, initial_value: int, final_value: int) -> void:
 	# o var _interpólate_value serve apenas para não exibir warnings

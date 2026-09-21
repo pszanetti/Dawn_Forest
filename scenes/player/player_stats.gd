@@ -87,6 +87,10 @@ func on_level_up() -> void:
 	current_mana = base_mana + bonus_mana
 	get_tree().call_group("bar_container", "update_bar", "ManaBar", current_mana)
 	get_tree().call_group("bar_container", "update_bar", "HealthBar", current_health)
+	# Dar uma pausa para colocar os novos valores na barra de experiência
+	yield(get_tree().create_timer(0.2), "timeout")
+	# Aguarda a finalização do timer para seguir para a linha abaixo
+	get_tree().call_group("bar_container", "reset_exp_bar", level_dict[str(level)], current_exp)
 	
 func update_health(type: String, value: int) -> void:
 	match type:

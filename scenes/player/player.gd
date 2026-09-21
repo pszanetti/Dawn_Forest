@@ -34,6 +34,10 @@ var can_track_input: bool = true
 var dead: bool = false
 var on_hit: bool = false
 
+# Variável para orientar a direção do efeito jump
+# Esse valor é alterado no script texture
+var flipped: bool = false
+
 export(int) var speed
 
 export(int) var jump_speed
@@ -70,6 +74,7 @@ func vertical_movement_env() -> void:
 	# just_pressed, indica uma vez ó mesmo que a tecla espeço continue apertada
 	if Input.is_action_just_pressed("ui_select") and jump_count < 2 and jump_condition:
 		jump_count += 1
+		spawn_effect("res://scenes/effect/dust/jump.tscn", Vector2(0, 18), flipped)
 		if next_to_wall() and not is_on_floor():
 			velocity.y = wall_jump_speed
 			velocity.x += wall_impulse_speed * direction

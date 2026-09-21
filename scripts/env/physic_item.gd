@@ -14,6 +14,7 @@ var item_texture: StreamTexture
 
 func _ready() -> void:
 	randomize()
+	aplly_random_impulse()
 	
 	
 
@@ -23,7 +24,7 @@ func aplly_random_impulse() -> void:
 		Vector2.ZERO,
 		Vector2( 
 			rand_range(-60, 60), # -> Angulo do impulso
-			-90                  # -> Altura
+			-100                  # -> Altura
 			)
 	)
 	

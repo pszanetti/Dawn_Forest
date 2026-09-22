@@ -26,6 +26,8 @@ export(int) var proximity_threshold
 export(int) var raycast_default_position
 # Quanto o inimigo dará de experiência caso o derrote
 export(int) var enemy_exp
+# Guardando o popup de texto -> floatingtext
+export(PackedScene) var floating_text
 
 func _physics_process(delta: float) -> void:
 	gravity(delta)
@@ -114,5 +116,14 @@ func spawn_physic_item(key: String, item_texture: StreamTexture, item_info: Arra
 	get_tree().root.call_deferred("add_child", item)
 	item.global_position = global_position
 	item.update_item_info(key, item_texture, item_info)
+	
+func spawn_floating_text(type_sign: String, type: String, value: int) -> void:
+	var text: FloatText = floating_text.instance()
+	text.rect_global_position = global_position
+	text.type = type
+	text.value = value
+	text.type_sign = type_sign
+	
+	get_tree().root.call_deferred("add_child", text)
 	
 	

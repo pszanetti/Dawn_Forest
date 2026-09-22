@@ -170,7 +170,7 @@ func on_invencibility_timer_timeout():
 	
 func spawn_floating_text(type_sign: String, type: String, value: int) -> void:
 	var text: FloatText = floating_text.instance()
-	text. rect_global_position = player.global_position
+	text.rect_global_position = player.global_position
 	text.type = type
 	text.value = value
 	text.type_sign = type_sign

@@ -27,6 +27,7 @@ func on_collision_area_entered(area):
 # Recebe o dano player_attack como damage
 func update_health(damage: int) -> void:
 	health -= damage
+	enemy.spawn_floating_text("-", "Damage", damage)
 #	print("CollisionArea Health", health)
 #	print("Ataque entrou dano ", damage)
 	if health < 0:

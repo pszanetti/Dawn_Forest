@@ -135,7 +135,6 @@ func _on_animation_finished(anim_name: String) -> void:
 			emit_signal("game_over")
 			
 		"spell_attack":
-			print("Fim da magica")
 			magic_attack = false
 			player.attacking = false
 			

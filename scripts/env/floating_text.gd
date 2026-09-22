@@ -38,7 +38,7 @@ func floating_text() -> void:
 			modulate = mana_color
 		"Damage":
 			modulate = damage_color
-			
+	interpolate()
 	
 func interpolate() -> void:
 	# Para tirar as "WARNINGS", basta incluir uma variável que tenha "_" no começo
@@ -51,17 +51,17 @@ func interpolate() -> void:
 		0.0,
 		0.3,
 		Tween.TRANS_LINEAR,
-		Tween.EASY_OUT,
+		Tween.EASE_OUT,
 		0.7								# FINAL -> Começa em 0.7
 		)
-	var _interpolate_scale_up: bool = tween.interpolate_property(			# INICIO -> começa em ZERO
+	var _interpolate_scale_up: bool = tween.interpolate_property(
 		self,
 		"rect_scale",		# -> Mexe na escala - Tamanho do Texto
 		Vector2(0.0, 0.0),
 		Vector2(1.0, 1.0),
 		0.3,
 		Tween.TRANS_LINEAR,
-		Tween.EASY_OUT
+		Tween.EASE_OUT
 		)
 	var _interpolate_scale_down: bool = tween.interpolate_property(
 		self,
@@ -70,7 +70,7 @@ func interpolate() -> void:
 		Vector2(0.4, 0.4),
 		1.0,
 		Tween.TRANS_LINEAR,
-		Tween.EASY_OUT,
+		Tween.EASE_OUT,
 		0.6					# - Mexe no meio
 		)
 	var _start: bool = tween.start()	# -> Executa a interpolação

@@ -90,7 +90,6 @@ func spawn_item_probability() -> void:
 	else:
 		drop_bonus = 3
 		
-	print ("Multiplicador de Drop" + str(drop_bonus))
 	
 	for key in drop_list.keys():
 		# Sorteando os itens

@@ -116,7 +116,7 @@ func verify_shield(value: int) -> void:
 		if (base_defense + bonus_defense) >= value:
 			return # Sai sa função verify_shield
 		#print(" acabou a defesa")
-		var damage = abs ((base_defense + bonus_defense) - value)
+		var damage = abs ((base_defense + bonus_defense) - value) #
 		current_health -= damage
 #		print("Entrou !? ", current_health)
 		

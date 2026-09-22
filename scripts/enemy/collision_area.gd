@@ -18,6 +18,11 @@ func on_collision_area_entered(area):
 		var player_stats: Node = area.get_parent().get_node("Stats")
 		var player_attack = player_stats.base_attack + player_stats.bonus_attack
 		update_health(player_attack)
+	elif area is FireSpell:     # -> Se foi atingido por um ataque mágico
+		update_health(area.spell_damage)
+		set_deferred("monitoring", false)
+		timer.start(invulnerability_timer)
+		
 	
 # Recebe o dano player_attack como damage
 func update_health(damage: int) -> void:
@@ -30,3 +35,8 @@ func update_health(damage: int) -> void:
 		return # -> Sai da função
 	enemy.can_hit = true
 
+
+
+func on_timer_timeout():
+	set_deferred("monitoring", true)
+	pass # Replace with function body.

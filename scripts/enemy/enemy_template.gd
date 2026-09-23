@@ -19,6 +19,8 @@ var player_ref: Player = null
 var drop_list: Dictionary
 # Multiplicador de Drop dos Itens
 var drop_bonus: int = 1
+# Sufixo para alguns inimigos
+var attack_animation_sufix: String = "_left"
 
 export(int) var speed 
 export(int) var gravity_speed
@@ -39,13 +41,13 @@ func _physics_process(delta: float) -> void:
 	
 
 func gravity(delta: float) -> void:
-	velocity.y = gravity_speed * delta
+	velocity.y += gravity_speed * delta
 	
 	
 func move_behaviour() -> void:
 	if player_ref != null:
 		var distance: Vector2 = player_ref.global_position - global_position
-		var direction = distance.normalized() # retorna número inteiro de 0 a 1
+		var direction: Vector2 = distance.normalized() # retorna número inteiro de 0 a 1
 		if abs(distance.x) <= proximity_threshold:
 			velocity.x = 0
 			can_attack = true
@@ -69,9 +71,11 @@ func verify_position() -> void:
 		var direction: float = sign(player_ref.global_position.x - global_position.x)
 		if direction > 0:
 			texture.flip_h = true
+			attack_animation_sufix = "_right"
 			floor_ray.position.x = abs(raycast_default_position)
 		elif direction < 0:
 			texture.flip_h = false
+			attack_animation_sufix = "_left"
 			floor_ray.position.x = raycast_default_position
 		
 func kill_enemy() -> void:

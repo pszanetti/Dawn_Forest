@@ -4,6 +4,10 @@ extends EnemyTexture
 
 class_name CrabbyTexture
 
+# Passando o efeito de ataque
+const ATTACK_EFECT: PackedScene = preload("res://scenes/effect/general_effect/crabby_attack_effect.tscn")
+var can_sapwn_effect: bool = true
+
 func animate(velocity: Vector2) -> void:
 	# Essas variáveis can_hit e can_diejá estão no EnemyTemplate
 	# inclusive o acesso ao raiz enemy que é o KinemmaticBody2d EnemyTemplate
@@ -24,6 +28,9 @@ func action_behaviour() -> void:
 		enemy.can_attack = false
 		attack_area_collision.set_deferred("disable", true)
 	elif enemy.can_attack:
+		if can_sapwn_effect:
+			spawn_attack_efect()
+			can_sapwn_effect = false
 		animation.play("attack" + enemy.attack_animation_sufix)
 		
 	pass
@@ -41,9 +48,11 @@ func on_animation_finished(anim_name: String) -> void:
 		"attack_left":
 			enemy.can_attack = false
 			enemy.set_physics_process(true)
+			can_sapwn_effect = true
 		"attack_right":
 			enemy.can_attack = false
 			enemy.set_physics_process(true)
+			can_sapwn_effect = true
 		"hit":
 			#print("Entrou no final da animação hit ")
 			enemy.can_hit = false
@@ -56,3 +65,9 @@ func on_animation_finished(anim_name: String) -> void:
 		"kill":
 			enemy.queue_free()
 		
+func spawn_attack_efect() -> void:
+	var effect = ATTACK_EFECT.instance()
+	get_tree().root.call_deferred("add_child", effect)
+	effect.global_position = global_position
+	effect.play_effect()
+	

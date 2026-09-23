@@ -3,7 +3,7 @@ extends AnimatedSprite
 # Gravado na pasta /scripts/env
 class_name EffectTemplate
 
-func play_effetc() -> void:
+func play_effect() -> void:
 	play()
 	pass
 

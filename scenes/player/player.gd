@@ -163,7 +163,7 @@ func spawn_effect(effect_path: String, offset: Vector2, is_flipped: bool) -> voi
 		effect_instance.flip_h = true
 		
 	effect_instance.global_position = global_position + offset
-	effect_instance.play_effetc()
+	effect_instance.play_effect()
 	
 func spawn_spell() -> void:
 	var spell: FireSpell = SPELL.instance()

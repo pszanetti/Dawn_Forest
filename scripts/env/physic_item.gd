@@ -68,5 +68,5 @@ func spawn_effect() -> void:
 	var collect_effect: EffectTemplate = COLLECT_EFFECT.instance()
 	get_tree().root.call_deferred("add_child", collect_effect)
 	collect_effect.global_position = global_position
-	collect_effect.play_effetc()
+	collect_effect.play_effect()
 	

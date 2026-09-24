@@ -9,6 +9,13 @@ export(float) var invulnerability_timer
 
 # Cria o link para acesso a dados do "Pai" -> KinemticBody EnemyTemplate
 export(NodePath) onready var enemy = get_node(enemy) as KinematicBody2D
+# Guardar referencai a Barra de vida dos inimigos
+export(NodePath) onready var enemy_bar = get_node(enemy_bar) as Control
+
+func _ready():
+	# Inicializa a Barra de Vida 
+	enemy_bar.init_bar(health)
+	
 
 
 func on_collision_area_entered(area):
@@ -27,6 +34,8 @@ func on_collision_area_entered(area):
 # Recebe o dano player_attack como damage
 func update_health(damage: int) -> void:
 	health -= damage
+	# Passa os novos valores para EnemyBar
+	enemy_bar.update_bar(health)
 	enemy.spawn_floating_text("-", "Damage", damage)
 #	print("CollisionArea Health", health)
 #	print("Ataque entrou dano ", damage)

@@ -58,19 +58,10 @@ environment = SubResource( 1 )
 [node name="Enemy" type="Node2D" parent="."]
 
 [node name="EnemySpawner" parent="Enemy" instance=ExtResource( 8 )]
-position = Vector2( 761, 124 )
-enemies_list = [ [ "res://scenes/enemy/whale.tscn", -11.5, 1.0, 100.0 ] ]
-spawn_countdown = 5.0
-enemy_amount = 1
-left_gap_position = -140
-right_gap_position = 140
-can_respawn = true
-
-[node name="EnemySpawner2" parent="Enemy" instance=ExtResource( 8 )]
-position = Vector2( 1320, 252 )
-enemies_list = [ [ "res://scenes/enemy/whale.tscn", -11.5, 1.0, 33.0 ], [ "res://scenes/enemy/crabby.tscn", -12.0, 34.0, 66.0 ], [ "res://scenes/enemy/pink_star.tscn", -12.0, 67.0, 100.0 ] ]
+position = Vector2( 693, 122 )
+enemies_list = [ [ "res://scenes/enemy/whale.tscn", -12, 1.0, 60.0 ], [ "res://scenes/enemy/crabby.tscn", -12, 61.0, 90.0 ], [ "res://scenes/enemy/pink_star.tscn", -12, 91.0, 100.0 ] ]
 spawn_countdown = 10.0
-enemy_amount = 3
-left_gap_position = -140
-right_gap_position = 140
+enemy_amount = 1
+left_gap_position = -150
+right_gap_position = 150
 can_respawn = true

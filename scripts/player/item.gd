@@ -43,3 +43,55 @@ func on_mouse_entered():
 func on_mouse_exited():
 	can_click = false
 	modulate.a = 1.0
+	
+func update_item(item: String, item_image:  StreamTexture, item_info: Array):
+	item_image_path = item_info[0]
+	item_type = item_info[1]
+	
+	match item_type:
+		"Equipment":
+			amount = 1
+			item_dictionary = item_info[2]
+			pass
+		"Weapon":
+			amount = 1
+			item_dictionary = item_info[2]
+			pass
+		"Resource":
+			amount += item_info[4]
+			type_value = item_info[2]
+			pass
+		"Health":
+			amount += item_info[4]
+			type_value = item_info[2]
+			pass
+		"Mana":
+			amount += item_info[4]
+			type_value = item_info[2]
+			pass
+	sell_price = item_info[3]
+	item_name = item
+	item_amount.text = str(amount)
+	item_texture.texture = item_image
+		
+	if amount != 0 and item_type != "Equipment" and item_type != "Weapon":
+		item_amount.show()
+		item_texture.show()
+		return
+		
+	if item_type == "Equipment" and item_type == "Weapon":
+		item_texture.show()
+		
+func update_slot() -> void:
+	item_amount.hide()
+	item_texture.hide()
+	
+	amount = 0
+	item_name = ""
+	item_type = ""
+	item_image_path = ""
+	type_value = 0
+	sell_price = 0
+		
+		
+	emit_signal("empt_slot", item_index)

@@ -59,6 +59,7 @@ func on_body_exited(_body):   # -> Coloca underscore "_" para dizer que não vam
 
 func _process(_delta) -> void:
 	if player_ref != null and Input.is_action_just_released("interact"):
+		get_tree().call_group("inventory", "update_slot", item_name, item_texture, item_info_list)
 		# Emitir sinal para enviar o item ao inventário
 		spawn_effect()
 		queue_free()

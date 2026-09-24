@@ -59,7 +59,7 @@ func update_item(item: String, item_image:  StreamTexture, item_info: Array):
 			pass
 		"Resource":
 			amount += item_info[4]
-			type_value = item_info[2]
+			item_dictionary = item_info[2]
 			pass
 		"Health":
 			amount += item_info[4]

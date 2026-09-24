@@ -4,6 +4,8 @@ class_name InventoryContainer
 
 onready var slot_container: GridContainer = get_node("VContainer/BackGround/GridContainer")
 
+onready var animation: AnimationPlayer = get_node("Animation")
+
 var current_state: String
 
 var can_click: bool = false
@@ -67,4 +69,4 @@ func update_slot(item_name: String, item_image: StreamTexture, item_info: Array)
 func empty_slot(index: int) -> void:
 	slot_list[index] = ""
 	slot_item_info[index] = ""
-	pass
+	

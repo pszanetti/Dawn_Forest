@@ -6,6 +6,9 @@ onready var texture: Sprite = get_node("Texture")
 onready var floor_ray: RayCast2D = get_node("FloorRay")
 onready var animation: AnimationPlayer = get_node("Animation")
 
+# Sinal que será emitido para o EnemySpawner 
+signal kill
+
 
 var can_die: bool = false
 var can_hit: bool = false
@@ -79,6 +82,9 @@ func verify_position() -> void:
 			floor_ray.position.x = raycast_default_position
 		
 func kill_enemy() -> void:
+	# Avisando o EnemySpawner que o inimigo morreu para ver se ele spawna outro
+	emit_signal("kill")
+	
 	animation.play("kill")
 	# Envia a experiência para o player
 	get_tree().call_group("player_stats", "update_exp", enemy_exp)

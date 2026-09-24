@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/resources/floor.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/env/mask.tscn" type="PackedScene" id=2]
@@ -7,10 +7,8 @@
 [ext_resource path="res://scenes/resources/small_decoration_tile.tres" type="TileSet" id=5]
 [ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/management/level.gd" type="Script" id=7]
-[ext_resource path="res://scenes/enemy/whale.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/env/enemy_spawner.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/general/hud.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/enemy/crabby.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/enemy/pink_star.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -57,11 +55,22 @@ environment = SubResource( 1 )
 
 [node name="Hud" parent="." instance=ExtResource( 9 )]
 
-[node name="Whale" parent="." instance=ExtResource( 8 )]
-position = Vector2( 184, 20 )
+[node name="Enemy" type="Node2D" parent="."]
 
-[node name="Crabby" parent="." instance=ExtResource( 10 )]
-position = Vector2( 705, 71 )
+[node name="EnemySpawner" parent="Enemy" instance=ExtResource( 8 )]
+position = Vector2( 761, 124 )
+enemies_list = [ [ "res://scenes/enemy/whale.tscn", -11.5, 1.0, 100.0 ] ]
+spawn_countdown = 5.0
+enemy_amount = 1
+left_gap_position = -140
+right_gap_position = 140
+can_respawn = true
 
-[node name="PinkStar" parent="." instance=ExtResource( 11 )]
-position = Vector2( 687, 239 )
+[node name="EnemySpawner2" parent="Enemy" instance=ExtResource( 8 )]
+position = Vector2( 1320, 252 )
+enemies_list = [ [ "res://scenes/enemy/whale.tscn", -11.5, 1.0, 33.0 ], [ "res://scenes/enemy/crabby.tscn", -12.0, 34.0, 66.0 ], [ "res://scenes/enemy/pink_star.tscn", -12.0, 67.0, 100.0 ] ]
+spawn_countdown = 10.0
+enemy_amount = 3
+left_gap_position = -140
+right_gap_position = 140
+can_respawn = true

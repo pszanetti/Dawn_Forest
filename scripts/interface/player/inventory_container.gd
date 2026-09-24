@@ -32,7 +32,7 @@ func update_slot(item_name: String, item_image: StreamTexture, item_info: Array)
 	var existing_item_index: int = slot_list.find(item_name)
 	if existing_item_index != -1:  # Encontrou o item !?
 		var item_slot: TextureRect = slot_container.get_child(existing_item_index)
-		if item_slot.amount < 9 and item_slot.item_type != "Equipament" and item_slot.item_type != "Weapon":
+		if item_slot.amount < 9 and item_slot.item_type != "Equipment" and item_slot.item_type != "Weapon":
 			var current_amount: int = item_slot.amount + item_info[4]
 			if current_amount > 9:
 				# Resto -> leftover
@@ -42,13 +42,26 @@ func update_slot(item_name: String, item_image: StreamTexture, item_info: Array)
 				item_info[3] = leftover
 				update_slot(item_name, item_image, item_info) 
 				return
+				
 			item_slot.update_item(item_name, item_image, item_info) # Se não exceder 9
 			return
-		pass
 	
-func update_slot() -> void:
+#	var aux_item_index:int = slot_list.find_last(item_name)
+#	if aux_item_index != -1:
+#		var item_slot: TextureRect = slot_container.get_child((aux_item_index)
+#		if item_slot.amount < 9 and item_slot.item_type != "Equipment" an item_slot.item_type != "Weapon":
+#			item_slot.update_item(item_name, item_image, item_info)
+#			return
+			
+	# Se não encontrou o Item na Lista
+	for index in slot_container.get_child_count():
+		var slot: TextureRect = slot_container.get_child(index)
+		if slot.item_name == "":
+			slot_list[index] = item_name
+			slot_item_info[index] = [item_name, item_image, item_info]
+			slot.update_item(item_name, item_image, item_info)
+			return
 	
-	pass
 	
 	
 func empty_slot(index: int) -> void:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/font/bit_potion.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/interface/inventory/item_background/type_1.png" type="Texture" id=2]
+[ext_resource path="res://scripts/interface/player/equipament_container.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -98,6 +99,7 @@ margin_top = -49.0
 margin_right = 49.0
 margin_bottom = -5.0
 rect_min_size = Vector2( 44, 44 )
+script = ExtResource( 3 )
 
 [node name="ConsumableBackground" type="TextureRect" parent="."]
 anchor_top = 0.5
@@ -144,12 +146,12 @@ margin_top = -22.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 44 )
 
-[node name="WeaponBackground2" type="TextureRect" parent="VContainer"]
+[node name="WeaponBackground" type="TextureRect" parent="VContainer"]
 margin_right = 20.0
 margin_bottom = 20.0
 texture = ExtResource( 2 )
 
-[node name="Item" type="TextureRect" parent="VContainer/WeaponBackground2"]
+[node name="Item" type="TextureRect" parent="VContainer/WeaponBackground"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -162,13 +164,13 @@ rect_min_size = Vector2( 16, 16 )
 expand = true
 stretch_mode = 3
 
-[node name="ArmorBackground3" type="TextureRect" parent="VContainer"]
+[node name="ArmorBackground" type="TextureRect" parent="VContainer"]
 margin_top = 24.0
 margin_right = 20.0
 margin_bottom = 44.0
 texture = ExtResource( 2 )
 
-[node name="Item" type="TextureRect" parent="VContainer/ArmorBackground3"]
+[node name="Item" type="TextureRect" parent="VContainer/ArmorBackground"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

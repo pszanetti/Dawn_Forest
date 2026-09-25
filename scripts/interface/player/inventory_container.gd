@@ -33,11 +33,12 @@ var slot_list: Array = [
 func _ready() -> void:
 	# Forma para conectar sinais por código 
 	for icon in aux_hcontainer.get_children():
-		icon.connect("mouse_exit", self, "mouse_interaction", ["exited"], icon)
-		icon.connect("mouse_entered", self, "mouse_interaction", ["entered"], icon)
+		icon.connect("mouse_exited", self, "mouse_interaction", ["exited", icon])
+		icon.connect("mouse_entered", self, "mouse_interaction", ["entered", icon])
 		
 		pass
 	for children in slot_container.get_children():
+		children.connect("item_clicked", self, "on_item_clicked")
 		children.connect("empty_slot", self, "empty_slot")
 		
 func update_slot(item_name: String, item_image: StreamTexture, item_info: Array) -> void:
@@ -89,6 +90,11 @@ func reset() -> void:
 	for children in slot_container.get_children():
 		children.reset()
 		pass
+		
+func on_item_clicked(index: int) -> void:
+	aux_animation.play("show_container")
+	item_index = index
+	pass
 	
 func mouse_interaction(state: String, object: TextureRect) -> void:
 	match state:
@@ -102,7 +108,7 @@ func mouse_interaction(state: String, object: TextureRect) -> void:
 			object.modulate.a = 1.0
 			pass
 			
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("click") and can_click and current_state != "":
 		match current_state:
 			"Equip":

@@ -41,6 +41,7 @@ func _ready() -> void:
 		children.connect("item_clicked", self, "on_item_clicked")
 		children.connect("empty_slot", self, "empty_slot")
 		
+		
 func update_slot(item_name: String, item_image: StreamTexture, item_info: Array) -> void:
 	# Verifica se o item já existe
 	var existing_item_index: int = slot_list.find(item_name)

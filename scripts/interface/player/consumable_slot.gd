@@ -71,9 +71,13 @@ func on_mouse_entered():
 	can_click = true
 	modulate.a = 0.5
 	pass # Replace with function body.
+func on_mouse_exited():
+	can_click = false
+	modulate.a = 1.0
+	pass # Replace with function body.
 
 func _process(_delta) -> void:
-	if Input.is_action_just_pressed("click"):
+	if Input.is_action_just_pressed("click") and can_click:
 		if consumable_item_amount > 0:
 			match consumable_item_type:
 				"Health":
@@ -99,10 +103,6 @@ func _process(_delta) -> void:
 		pass
 	pass
 
-func on_mouse_exited():
-	can_click = false
-	modulate.a = 1.0
-	pass # Replace with function body.
 	
 func reset() -> void:
 	consumable_item_name = ""

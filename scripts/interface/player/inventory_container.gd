@@ -75,6 +75,7 @@ func update_slot(item_name: String, item_image: StreamTexture, item_info: Array)
 			slot_list[index] = item_name
 			slot_item_info[index] = [item_name, item_image, item_info]
 			slot.update_item(item_name, item_image, item_info)
+			print("o Inventário recebeu ", item_name, " ", item_image," ", item_info)
 			return
 	
 	
@@ -113,6 +114,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("click") and can_click and current_state != "":
 		match current_state:
 			"Equip":
+				print("Equipando Item")
 				slot_container.get_child(item_index).equip_item()
 				pass
 			"Delete":

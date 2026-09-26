@@ -8,14 +8,17 @@ onready var armor_container: TextureRect = get_node("VContainer/ArmorBackground"
 onready var weapon_container: TextureRect = get_node("VContainer/WeaponBackground")
 
 func consumable_slot(item_texure: StreamTexture, item_info: Array) -> void:
+	print("Vida ou Mana ")
 	consumable_container.update_consumable_slot(item_texure, item_info)
 	
 	
-func armor_cantainer(item_texture: StreamTexture, item_info: Array) -> void:
+func armor_slot(item_texture: StreamTexture, item_info: Array) -> void:
+	print("Defesa ")
 	armor_container.update_armor_slot(item_texture, item_info)
 	
 	
-func weapon_container(item_texture: StreamTexture, item_info: Array) -> void:
+func weapon_slot(item_texture: StreamTexture, item_info: Array) -> void:
+	print("Arma ")
 	weapon_container.update_weapon_slot(item_texture, item_info)
 	
 	

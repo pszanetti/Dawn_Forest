@@ -10,7 +10,7 @@ func _ready() -> void:
 	drop_list = {
 		"Heal Potion" : [                                      # Chave do Item
 			"res://assets/item/consumable/health_potion.png",  # -> Path do png do item
-			20,   # -> Probabilidade de Drop
+			36,   # -> Probabilidade de Drop
 			"Health",  # -> Tipo do Item
 			5,         # -> Quantidade 
 			2          # -> Valor de venda
@@ -26,7 +26,7 @@ func _ready() -> void:
 			
 		"Whale Mouth" : [
 			"res://assets/item/resource/whale/whale_mouth.png",
-			45,
+			1,
 			"Resource",
 			{},         # Indica que é vazio, não é consumível
 			2
@@ -34,7 +34,7 @@ func _ready() -> void:
 			
 		"Whale Eye" : [
 			"res://assets/item/resource/whale/whale_eye.png",
-			15,
+			1,
 			"Resource",
 			{},
 			6
@@ -42,7 +42,7 @@ func _ready() -> void:
 			
 		"Whale Tall" : [
 			"res://assets/item/resource/whale/whale_tail.png",
-			3,
+			1,
 			"Resource",
 			{},
 			25
@@ -50,8 +50,8 @@ func _ready() -> void:
 			
 		"Whale Mask" : [
 			"res://assets/item/equipment/whale_mask.png",
-			3,
-			"Equipament",
+			47,
+			"Equipment",
 			# Dicionário para popular o equipamento
 			{
 				"Mana": 5,

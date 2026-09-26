@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/font/bit_potion.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/interface/inventory/item_background/type_1.png" type="Texture" id=2]
-[ext_resource path="res://scripts/interface/player/equipament_container.gd" type="Script" id=3]
+[ext_resource path="res://scripts/interface/player/equipment_container.gd" type="Script" id=3]
 [ext_resource path="res://scripts/interface/player/consumable_slot.gd" type="Script" id=4]
+[ext_resource path="res://scripts/interface/player/weapon_slot.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -92,7 +93,7 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 
-[node name="EquipamentContainer" type="Control"]
+[node name="EquipamentContainer" type="Control" groups=["equipment_container"]]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
@@ -152,6 +153,7 @@ rect_min_size = Vector2( 20, 44 )
 margin_right = 20.0
 margin_bottom = 20.0
 texture = ExtResource( 2 )
+script = ExtResource( 5 )
 
 [node name="Item" type="TextureRect" parent="VContainer/WeaponBackground"]
 anchor_left = 0.5
@@ -190,3 +192,5 @@ anims/show_container = SubResource( 4 )
 
 [connection signal="mouse_entered" from="ConsumableBackground" to="ConsumableBackground" method="on_mouse_entered"]
 [connection signal="mouse_exited" from="ConsumableBackground" to="ConsumableBackground" method="on_mouse_exited"]
+[connection signal="mouse_entered" from="VContainer/WeaponBackground" to="VContainer/WeaponBackground" method="on_mouse_entered"]
+[connection signal="mouse_exited" from="VContainer/WeaponBackground" to="VContainer/WeaponBackground" method="on_mouse_exited"]

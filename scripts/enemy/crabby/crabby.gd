@@ -8,7 +8,7 @@ func _ready():
 	drop_list = {
 		"Heal Potion": [
 			"res://assets/item/consumable/health_potion.png",
-			15,
+			5,
 			"Health",
 			5,
 			2
@@ -22,7 +22,7 @@ func _ready():
 			],
 		"Crabby Eye": [
 			"res://assets/item/resource/crabby/crab_eye.png",
-			35,
+			5,
 			"Resource",
 			{},
 			3
@@ -37,7 +37,7 @@ func _ready():
 		"Crabby Belt": [
 			"res://assets/item/equipment/crabby_belt.png",
 			5,
-			"Equipament",
+			"Equipment",
 			{
 				"Health": 3,
 				"Attack": 1
@@ -46,7 +46,7 @@ func _ready():
 			],
 		"Crabby Axe": [
 			"res://assets/item/equipment/crabby_axe.png",
-			2,
+			42,
 			"Weapon",
 			{
 				"Attack": 3,

@@ -46,30 +46,30 @@ func on_mouse_exited():
 	
 func update_item(item: String, item_image:  StreamTexture, item_info: Array):
 	item_image_path = item_info[0]
-	item_type = item_info[2]
+	item_type = item_info[1]
 	
 	match item_type:
 		"Equipment":
 			amount = 1
-			item_dictionary = item_info[3]
+			item_dictionary = item_info[2]
 			pass
 		"Weapon":
 			amount = 1
-			item_dictionary = item_info[3]
+			item_dictionary = item_info[2]
 			pass
 		"Resource":
 			amount += item_info[4]
-			item_dictionary = item_info[3]
+			item_dictionary = item_info[2]
 			pass
 		"Health":
 			amount += item_info[4]
-			type_value = item_info[3]
+			type_value = item_info[2]
 			pass
 		"Mana":
 			amount += item_info[4]
-			type_value = item_info[3]
+			type_value = item_info[2]
 			pass
-	sell_price = item_info[4]
+	sell_price = item_info[3]
 	item_name = item
 	item_amount.text = str(amount)
 	item_texture.texture = item_image
@@ -95,6 +95,7 @@ func equip_item() -> void:
 		return
 		
 	if item_type == "Health" or item_type == "Mana":
+		print("Equipando Mana ou Vida")
 		get_tree().call_group(
 			"equipment_container",
 			"consumable_slot",
@@ -109,6 +110,7 @@ func equip_item() -> void:
 				]
 			)
 	if item_type == "Equipment":
+		print("Equipando Defesa ")
 		get_tree().call_group(
 			"equipment_container",
 			"armor_slot",
@@ -122,6 +124,7 @@ func equip_item() -> void:
 				]
 			)
 	if item_type == "Weapon":
+		print("Equipando Arma ")
 		get_tree().call_group(
 			"equipment_container",
 			"weapon_slot",

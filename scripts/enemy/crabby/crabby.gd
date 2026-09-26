@@ -36,7 +36,7 @@ func _ready():
 			],
 		"Crabby Belt": [
 			"res://assets/item/equipment/crabby_belt.png",
-			5,
+			45,
 			"Equipment",
 			{
 				"Health": 3,
@@ -46,7 +46,7 @@ func _ready():
 			],
 		"Crabby Axe": [
 			"res://assets/item/equipment/crabby_axe.png",
-			42,
+			2,
 			"Weapon",
 			{
 				"Attack": 3,

@@ -113,9 +113,9 @@ func spawn_item_probability() -> void:
 			# Guarda demais informações do item
 			var item_info: Array = [
 				drop_list[key][0],
+				drop_list[key][1],
 				drop_list[key][2],
 				drop_list[key][3],
-				drop_list[key][4],
 				1                 # -> Quantidade do array
 				]
 			spawn_physic_item(key, item_texture, item_info)

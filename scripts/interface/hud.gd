@@ -2,7 +2,7 @@ extends CanvasLayer
 
 onready var inventory: Control = get_node("InventoryContainer")
 
-func _process(delta):
+func _process(_delta) -> void:
 	show_inventory()
 	
 

@@ -164,7 +164,6 @@ margin_right = 8.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 16, 16 )
 expand = true
-stretch_mode = 3
 
 [node name="ArmorBackground" type="TextureRect" parent="VContainer"]
 margin_top = 24.0
@@ -183,9 +182,11 @@ margin_right = 8.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 16, 16 )
 expand = true
-stretch_mode = 3
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
 anims/hide_container = SubResource( 3 )
 anims/show_container = SubResource( 4 )
+
+[connection signal="mouse_entered" from="ConsumableBackground" to="ConsumableBackground" method="on_mouse_entered"]
+[connection signal="mouse_exited" from="ConsumableBackground" to="ConsumableBackground" method="on_mouse_exited"]

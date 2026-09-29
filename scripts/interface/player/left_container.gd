@@ -9,8 +9,15 @@ export(NodePath) onready var stats_info = get_node(stats_info) as TextureRect
 
 func _ready() -> void:
 	for container in grid_container.get_children():
-		container.connecr("mouse_exit", self, "mouse_intaraction", ["exited", container])
-		container.connecr("mouse_entered", self, "mouse_intaraction", ["entered", container])
+		default_bonus_value(container)
+		# Conecta com as funções padrão mouse_exited e mouse_entered
+		container.connect("mouse_exited", self, "mouse_interaction", ["exited", container])
+		container.connect("mouse_entered", self, "mouse_interaction", ["entered", container])
+	
+
+func default_bonus_value(container: HBoxContainer) -> void:
+	container.get_node("Bonus").text = ""
+	pass
 	
 func mouse_interaction(state: String, container: HBoxContainer) -> void:
 	match state:
@@ -19,27 +26,26 @@ func mouse_interaction(state: String, container: HBoxContainer) -> void:
 			match container.name:
 				"HealthContainer":
 					update_stats_info_container("health")
-					pass
+					
 				"ManaContainer":
 					update_stats_info_container("mana")
-					pass
+					
 				"AttackContainer":
 					update_stats_info_container("attack")
-					pass
+					
 				"MagicAttackContainer":
 					update_stats_info_container("magic_attack")
-					pass
+					
 				"DefenseContainer":
 					update_stats_info_container("defense")
-					pass
-			pass
 		"exited":
+			print("Não entrou")
 			container.modulate.a = 1.0
-			stats_info.play_animation("hide_container")
+#			stats_info.play_animation("hide_container")
 			pass
 		
 func update_stats_info_container(stats: String) -> void:
-	stats_info.update_container(stats)
+#	stats_info.update_container(stats)
 	pass
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://assets/font/thaleah_fat.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/interface/stats/icon/mana_icon.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://assets/interface/stats/text/knight_class_text.png" type="Texture" id=21]
 [ext_resource path="res://assets/interface/stats/text/avaliable_points.png" type="Texture" id=22]
 [ext_resource path="res://scripts/interface/player/stats_container.gd" type="Script" id=23]
+[ext_resource path="res://scripts/interface/player/left_container.gd" type="Script" id=24]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -304,9 +305,8 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 9.0
-margin_top = 90.0
 margin_right = 89.0002
-margin_bottom = 170.0
+margin_bottom = 80.0
 texture = ExtResource( 17 )
 
 [node name="TargetStat" type="TextureRect" parent="StatsInfo"]
@@ -349,10 +349,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 218.0
-margin_top = 42.0
-margin_right = 298.0
-margin_bottom = 122.0
+margin_left = -102.0
+margin_top = -48.0
+margin_right = -22.0
+margin_bottom = 32.0
 texture = ExtResource( 19 )
 
 [node name="Text" type="TextureRect" parent="PointsInfo"]
@@ -404,6 +404,8 @@ margin_top = -138.0
 margin_right = 106.0
 margin_bottom = -10.0
 texture = ExtResource( 4 )
+script = ExtResource( 24 )
+stats_info = NodePath("../StatsInfo")
 
 [node name="GridContainer" type="GridContainer" parent="LeftContainer"]
 anchor_left = 0.5

@@ -163,3 +163,8 @@ func update_amount(value: int) -> void:
 		update_slot()
 		pass
 	pass
+	
+func reset() -> void:
+	can_click = false
+	modulate.a = 1.0
+	pass

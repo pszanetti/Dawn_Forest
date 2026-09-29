@@ -19,8 +19,8 @@ func update_bonus_stats(bonus_dic: Dictionary, state: bool) -> void:
 	right_container.update_bonus_stats(bonus_dic, state)
 	pass
 func reset() -> void:
-	left_container.reset()
-	right_container.reset()
+#	left_container.reset()
+#	right_container.reset()
 	pass
 func update_available_points() -> void:
 	# Chamado sempre quando passar de nivel + 5 sempre quando passa de nivel

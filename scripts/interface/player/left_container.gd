@@ -48,4 +48,10 @@ func update_stats_info_container(stats: String) -> void:
 #	stats_info.update_container(stats)
 	pass
 
-
+func update_stats(stats_list: Array, bonus_stats_list: Array) -> void:
+	for index in grid_container.get_child_count():
+		# Pega dos 5 container as label Text
+		var target_stat_text: Label = grid_container.get_child(index).get_node("Text")
+		# Pega a Label de bonus que está dentro dos 5 containers do GridContainer
+		var target_bonus_stat_text: Label = grid_container.get_child(index).get_node("Bonus")
+	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://assets/font/thaleah_fat.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/interface/stats/icon/mana_icon.png" type="Texture" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://scripts/interface/player/stats_container.gd" type="Script" id=23]
 [ext_resource path="res://scripts/interface/player/left_container.gd" type="Script" id=24]
 [ext_resource path="res://scripts/interface/player/stats_info.gd" type="Script" id=25]
+[ext_resource path="res://scripts/interface/player/right_container.gd" type="Script" id=26]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -306,9 +307,8 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 9.0
-margin_top = 90.0
 margin_right = 89.0002
-margin_bottom = 170.0
+margin_bottom = 80.0
 texture = ExtResource( 17 )
 script = ExtResource( 25 )
 
@@ -352,10 +352,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 218.0
-margin_top = 42.0
-margin_right = 298.0
-margin_bottom = 122.0
+margin_left = -102.0
+margin_top = -48.0
+margin_right = -22.0
+margin_bottom = 32.0
 texture = ExtResource( 19 )
 
 [node name="Text" type="TextureRect" parent="PointsInfo"]
@@ -579,6 +579,8 @@ margin_top = -138.0
 margin_right = -10.0
 margin_bottom = -10.0
 texture = ExtResource( 9 )
+script = ExtResource( 26 )
+points_info = NodePath("../PointsInfo")
 
 [node name="VContainer" type="VBoxContainer" parent="RightContainer"]
 margin_left = 12.5

@@ -57,11 +57,11 @@ func update_stats(stats_list: Array, bonus_stats_list: Array) -> void:
 		var target_bonus_stat_text: Label = grid_container.get_child(index).get_node("Bonus")
 		
 		if bonus_stats_list[index] != 0:
-			target_stat_text.txt = str(stats_list[index]) + " +"
+			target_stat_text.text = str(stats_list[index]) + " +"
 			target_bonus_stat_text.text = str(bonus_stats_list[index])
 			
 		else:
-			target_stat_text.txt = str(stats_list[index])
+			target_stat_text.text = str(stats_list[index])
 			target_bonus_stat_text.text = ""
 			
 func update_bonus_stats(bonus_dict: Dictionary, state: bool) -> void:

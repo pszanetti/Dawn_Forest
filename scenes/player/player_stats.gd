@@ -65,7 +65,52 @@ func _ready() -> void:
 	# Acessando o Barra de Vida, mana e experiência
 	# Acessando a função init_bar e enviando os valores
 	get_tree().call_group("bar_container", "init_bar", max_health, max_mana, level_dict[str(level)])
+	update_stats_hud()
 	
+func update_stats(stat: String) -> void:
+	match stat:
+		"Attack":
+			base_attack += 1
+		"Mana":
+			max_mana += 1
+			base_mana += 1
+			current_mana += 1
+			
+			get_tree().call_group("bar_container", "increase_max_value", "Mana", max_mana, current_mana)
+			
+		"Health":
+			max_health += 1
+			base_health += 1
+			current_health += 1
+			get_tree().call_group("bar_container", "increase_max_value", "Health", max_health, current_health)
+		# Nome igual ao StatsContainer
+		"Magic Attack":
+			base_magic_attack += 1
+			
+		"Defense":
+			base_defense += 1
+	update_stats_hud()
+	
+func update_stats_hud() -> void:
+	get_tree().call_group(
+		"stats_hud", 
+		"update_stats",[
+			base_health,
+			base_mana,
+			base_attack,
+			base_magic_attack,
+			base_defense
+			],
+				[
+				bonus_health,
+				bonus_mana,
+				bonus_attack,
+				bonus_magic_attack,
+				bonus_defense
+				]
+		)
+	pass
+
 # Atualizando a experiencia
 func update_exp(value: int) -> void:
 	current_exp += value

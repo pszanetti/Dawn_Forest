@@ -52,6 +52,7 @@ func apply_weight(weight: int, stat: String) -> void:
 		stats_points -= weight
 		points_info.update_text_value(str(stats_points))
 		# Enviar os atributos evoluídos para o sistema de stats do persanagem
+		get_tree().call_group("player_stats", "update_stats", stat)
 	
 func reset() -> void:
 	for children in vcontainer.get_children():

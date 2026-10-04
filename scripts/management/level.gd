@@ -8,9 +8,16 @@ onready var player: KinematicBody2D = get_node("Player")
 
 func _ready() -> void:
 	var _game_over = player.get_node("Texture").connect("game_over", self, "on_game_over")
-	pass
-
+	data_management.load_data()
+	
+	player.global_position = data_management.data_dictionary.player_position
 
 func on_game_over() -> void:
 	var _reload = get_tree().reload_current_scene()
 	pass
+
+func _exit_tree():
+	# Função que é chamada sempre que fechar o projeto
+	data_management.data_dictionary.player_position = player.global_position
+	data_management.save_data()
+	

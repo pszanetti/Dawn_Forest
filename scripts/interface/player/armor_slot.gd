@@ -38,6 +38,8 @@ func update_armor_slot(item_texture: StreamTexture, item_info: Array) -> void:
 	armor_price = item_info[4]
 	# Enviar os atributos ao status em stats
 	armor_item.show()
+	# Enviar os atributos do equipamento ao sistema de status - stats
+	get_tree().call_group("stats_hud", "update_bonus_stats", armor_dictionary, false)
 		
 func reset() -> void:
 	armor_name = ""

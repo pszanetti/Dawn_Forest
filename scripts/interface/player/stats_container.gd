@@ -21,7 +21,7 @@ func update_stats(stats_list: Array, bonus_stats_list: Array) -> void:
 	
 	
 func update_bonus_stats(bonus_dic: Dictionary, state: bool) -> void:
-	right_container.update_bonus_stats(bonus_dic, state)
+	left_container.update_bonus_stats(bonus_dic, state)
 	
 func reset() -> void:
 	left_container.reset()

@@ -221,6 +221,10 @@ _global_script_class_icons={
 config/name="Dawn Forest"
 config/icon="res://icon.png"
 
+[autoload]
+
+data_management="*res://scripts/management/data_management.gd"
+
 [display]
 
 window/size/width=320

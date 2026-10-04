@@ -181,5 +181,6 @@ func _exit_tree():
 	# Função que é chamada sempre que fechar o projeto
 	if dead == true:
 		return
+	
 	data_management.data_dictionary.player_position = global_position
 	data_management.save_data()

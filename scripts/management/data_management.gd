@@ -7,6 +7,10 @@ var initial_position: Vector2 = Vector2(25, 100)
 var data_dictionary: Dictionary = {
 	"current_exp": 0,
 	"current_level": 1,
+	
+	"current_mana": 10,
+	"current_health": 15,
+	
 	"player_texture": "",
 	"player_position": initial_position
 	}

@@ -57,22 +57,27 @@ export(PackedScene) var floating_text
 onready var invencibility_timer = get_node("InvencibilityTimer")
 
 func _ready() -> void:
+	current_health = base_health + bonus_health
+	max_health = base_health + bonus_health
+
+	current_mana = base_mana + bonus_mana
+	max_mana = base_mana + bonus_mana
+	
 	var file: File = File.new()
 	if file.file_exists(data_management.save_path):
 		data_management.load_data()
-		
+		# Le a experiencia exp e o level 
 		level = data_management.data_dictionary.current_level
 		current_exp = data_management.data_dictionary.current_exp
+		
+		current_mana = data_management.data_dictionary.current_mana
+		current_health = data_management.data_dictionary.current_health
+		get_tree().call_group("bar_container", "init_bar", max_health, max_mana, level_dict[str(level)])
 		get_tree().call_group("bar_container", "reset_exp_bar", level_dict[str(level)], current_exp)
 		
-	current_health = base_health + bonus_health
-	max_health = current_health
-	
-	current_mana = base_mana + bonus_mana
-	max_mana = current_mana
-	# Acessando o Barra de Vida, mana e experiência
-	# Acessando a função init_bar e enviando os valores
-	get_tree().call_group("bar_container", "init_bar", max_health, max_mana, level_dict[str(level)])
+		get_tree().call_group("bar_container", "update_bar", "ManaBar", current_mana)
+		get_tree().call_group("bar_container", "update_bar", "HealthBar", current_health)
+		
 	update_stats_hud()
 	
 func update_stats(stat: String) -> void:
@@ -224,6 +229,10 @@ func update_health(type: String, value: int) -> void:
 				player.on_hit = true
 				player.attacking = false
 				# Chama aniamação de dano e bloqueia o ataque
+	# Salva a vida (health) atual
+	data_management.data_dictionary.current_health = current_health
+	data_management.save_data()
+	# Atualiza o bar - barra de vida
 	get_tree().call_group("bar_container", "update_bar", "HealthBar", current_health)
 	
 	
@@ -253,6 +262,10 @@ func update_mana(type: String, value: int) -> void:
 			current_mana -= value
 			spawn_floating_text("-", "Mana", value)
 			
+	# Salva os dados de mana atual
+	data_management.data_dictionary.current_mana = current_mana
+	data_management.save_data()
+	# Atualiza a barra de mana
 	get_tree().call_group("bar_container", "update_bar", "ManaBar", current_mana)
 # Função para teste de dano e morte
 # Sempre que apertar "espaço" irá causar 5 de dano

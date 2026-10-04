@@ -9,6 +9,7 @@ var data_dictionary: Dictionary = {
 	"player_position": initial_position
 	}
 
+
 func save_data() -> void:
 	var file:File = File.new()
 	var error = file.open(save_path, File.WRITE)
@@ -19,7 +20,6 @@ func save_data() -> void:
 func load_data() -> void:
 	var file:File = File.new()
 	if file.file_exists(save_path):
-		file.store_var(data_dictionary)
 		var error = file.open(save_path, File.READ)
 		if error == OK:
 			data_dictionary = file.get_var()

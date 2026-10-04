@@ -49,6 +49,11 @@ export(int) var speed
 export(int) var jump_speed
 export(int) var player_gravity
 
+# Variável importante para saber se salva ou não a posição do player
+
+#func _ready() -> void:
+#	global_position = Vector2(25, 100)
+#	pass
 
 func _physics_process(delta):
 	horizontal_movement_env()
@@ -171,4 +176,10 @@ func spawn_spell() -> void:
 	spell.global_position = global_position + spell_offset
 	get_tree().root.call_deferred("add_child", spell)
 	
-	
+func _exit_tree():
+	print(dead)
+	# Função que é chamada sempre que fechar o projeto
+	if dead == true:
+		return
+	data_management.data_dictionary.player_position = global_position
+	data_management.save_data()

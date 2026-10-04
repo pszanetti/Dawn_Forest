@@ -13,7 +13,7 @@ func _ready() -> void:
 	for children in vcontainer.get_children():
 		
 		var button: TextureButton = children.get_node("Plus")
-		print(button.name)
+#		print(button.name)
 		# o var _etc é só para tirar os warrnings em amarelo
 		var _pressed: bool = button.connect("pressed", self, "verify_stats", [children.name])
 		var _exited: bool = button.connect("mouse_exited", self, "mouse_interaction", ["exited", button])

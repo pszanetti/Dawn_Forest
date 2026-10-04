@@ -12,12 +12,10 @@ func _ready() -> void:
 	
 	player.global_position = data_management.data_dictionary.player_position
 
-func on_game_over() -> void:
-	var _reload = get_tree().reload_current_scene()
-	pass
 
-func _exit_tree():
-	# Função que é chamada sempre que fechar o projeto
-	data_management.data_dictionary.player_position = player.global_position
+func on_game_over() -> void:
+	data_management.data_dictionary.player_position = data_management.initial_position
 	data_management.save_data()
+	var _reload = get_tree().reload_current_scene()
+	
 	

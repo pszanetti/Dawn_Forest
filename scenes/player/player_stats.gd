@@ -57,6 +57,14 @@ export(PackedScene) var floating_text
 onready var invencibility_timer = get_node("InvencibilityTimer")
 
 func _ready() -> void:
+	var file: File = File.new()
+	if file.file_exists(data_management.save_path):
+		data_management.load_data()
+		
+		level = data_management.data_dictionary.current_level
+		current_exp = data_management.data_dictionary.current_exp
+		get_tree().call_group("bar_container", "reset_exp_bar", level_dict[str(level)], current_exp)
+		
 	current_health = base_health + bonus_health
 	max_health = current_health
 	
@@ -174,11 +182,18 @@ func update_exp(value: int) -> void:
 		# Incrementando o level do personagem
 		on_level_up()
 		level += 1
+		# Salvando dos dados
+		data_management.data_dictionary.current_level = level
+		
 		# Checando se chegou no nível máximo sendo o level 9 o máximo no level_dict
 	elif current_exp >= level_dict[str(level)] and level == 9: 
 		current_exp = level_dict[str(level)]
 		
-		
+	# Salvando os dados
+	data_management.data_dictionary.current_exp = current_exp
+	data_management.save_data()
+	
+	
 func on_level_up() -> void:
 	current_health = base_health + bonus_health
 	current_mana = base_mana + bonus_mana

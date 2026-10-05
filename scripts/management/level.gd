@@ -28,6 +28,7 @@ func on_game_over() -> void:
 	data_management.data_dictionary.current_level = 1
 	data_management.data_dictionary.current_mana = 10
 	data_management.data_dictionary.current_health = 15 
+	data_management.data_dictionary.available_points = 0
 	data_management.save_data()
 	var _reload = get_tree().reload_current_scene()
 	

@@ -177,7 +177,6 @@ func spawn_spell() -> void:
 	get_tree().root.call_deferred("add_child", spell)
 	
 func _exit_tree():
-	print(dead)
 	# Função que é chamada sempre que fechar o projeto
 	if dead == true:
 		return

@@ -11,8 +11,8 @@ onready var right_container: TextureRect = get_node("RightContainer")
 var is_visible: bool = false
 
 # Apenas para testes
-func _ready() -> void:
-	update_available_points()
+#func _ready() -> void:
+#	update_available_points()
 
 
 

@@ -81,6 +81,9 @@ func update_stats_with_serialized_data() -> void:
 	var base_stats: Array = data_management.data_dictionary.base_stats
 	base_health = base_stats[0]
 	base_mana = base_stats[1]
+	base_attack = base_stats[2]
+	base_magic_attack = base_stats[3]
+	base_defense = base_stats[4]
 	
 	max_health = base_health + bonus_health
 	max_mana = base_mana + bonus_mana

@@ -56,22 +56,19 @@ export(PackedScene) var floating_text
 # Carregando o Timer de invencibilidade
 onready var invencibility_timer = get_node("InvencibilityTimer")
 
-func _ready() -> void:
-	current_health = base_health + bonus_health
-	max_health = base_health + bonus_health
-
-	current_mana = base_mana + bonus_mana
-	max_mana = base_mana + bonus_mana
-	
+func _ready() -> void:	
 	var file: File = File.new()
 	if file.file_exists(data_management.save_path):
 		data_management.load_data()
 		# Le a experiencia exp e o level 
 		level = data_management.data_dictionary.current_level
 		current_exp = data_management.data_dictionary.current_exp
-		
+		# Update Mana e Health
+		update_stats_with_serialized_data()
+		# Le a mana e a vida (health) salvas 
 		current_mana = data_management.data_dictionary.current_mana
 		current_health = data_management.data_dictionary.current_health
+		
 		get_tree().call_group("bar_container", "init_bar", max_health, max_mana, level_dict[str(level)])
 		get_tree().call_group("bar_container", "reset_exp_bar", level_dict[str(level)], current_exp)
 		
@@ -79,6 +76,16 @@ func _ready() -> void:
 		get_tree().call_group("bar_container", "update_bar", "HealthBar", current_health)
 		
 	update_stats_hud()
+	
+func update_stats_with_serialized_data() -> void:
+	var base_stats: Array = data_management.data_dictionary.base_stats
+	base_health = base_stats[0]
+	base_mana = base_stats[1]
+	
+	max_health = base_health + bonus_health
+	max_mana = base_mana + bonus_mana
+	print(base_stats)
+	
 	
 func update_stats(stat: String) -> void:
 	match stat:
@@ -170,7 +177,20 @@ func update_stats_hud() -> void:
 				bonus_defense
 				]
 		)
-	pass
+	data_management.data_dictionary.base_stats = [
+		base_health,
+		base_mana,
+		base_attack,
+		base_magic_attack,
+		base_defense
+		]
+	data_management.save_data()
+		
+	if current_health > max_health:
+		current_health = max_health
+	if current_mana > max_mana:
+		current_mana = max_mana
+	
 
 # Atualizando a experiencia
 func update_exp(value: int) -> void:

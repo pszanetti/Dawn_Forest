@@ -12,7 +12,15 @@ var data_dictionary: Dictionary = {
 	"current_health": 15,
 	
 	"player_texture": "",
-	"player_position": initial_position
+	"player_position": initial_position,
+	
+	"base_stats": [
+		15,
+		10,
+		1,
+		3,
+		1
+		]
 	}
 
 

@@ -16,6 +16,18 @@ var weapon_texture_path: String = ""
 
 var weapon_price: int
 
+func _ready():
+	var file: File = File.new()
+	if file.file_exists(data_management.save_path):
+		data_management.load_data()
+		# Se não tiver mais consumível -> lista vazia
+		if data_management.data_dictionary.weapon_container.empty():
+			return
+			
+		var data:Array = data_management.data_dictionary.weapon_container
+		var item_texture: StreamTexture = load(data[0])
+		update_weapon_slot(item_texture, data)
+
 func update_weapon_slot(item_texture: StreamTexture, item_info:Array) -> void:
 	print("Equipando arma")
 	if weapon_name != "":
@@ -43,6 +55,9 @@ func update_weapon_slot(item_texture: StreamTexture, item_info:Array) -> void:
 	
 	# Enviar os atributos do equipamento ao sistema de status - stats
 	get_tree().call_group("stats_hud", "update_bonus_stats", weapon_dictionary, false)
+	# Salvando os dados
+	data_management.data_dictionary.weapon_container = item_info
+	data_management.save_data()
 	
 func reset() -> void:
 	weapon_name = ""
@@ -54,7 +69,8 @@ func reset() -> void:
 	# Resetar os stats bonus da arma equipada anteriormente
 	weapon_dictionary = {}
 	
-	pass
+	data_management.data_dictionary.weapon_container = []
+	data_management.save_data()
 
 
 

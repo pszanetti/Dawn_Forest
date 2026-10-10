@@ -119,3 +119,36 @@ text = "Quit
 "
 align = 2
 valign = 1
+
+[node name="SkinSelect" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BackButton" type="Button" parent="SkinSelect" groups=["button"]]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -80.0
+margin_top = 12.0
+margin_right = -20.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 60, 0 )
+focus_mode = 0
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+flat = true
+
+[node name="Label" type="Label" parent="SkinSelect/BackButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 60, 0 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 2 )
+text = "Back
+
+"
+align = 2
+valign = 1

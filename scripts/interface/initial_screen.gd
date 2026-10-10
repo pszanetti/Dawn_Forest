@@ -6,6 +6,7 @@ onready var button_container: VBoxContainer = get_node("Menu/ButtonContainer")
 
 onready var continue_button: Button = button_container.get_node("Continue")
 
+onready var skin_select: Control = get_node("SkinSelect")
 
 func _ready() -> void:
 	# Conectando os sinais
@@ -13,27 +14,29 @@ func _ready() -> void:
 		button.connect("pressed", self, "on_button_pressed", [button.name])
 		button.connect("mouse_exited", self, "mouse_interaction", [button, "exited"])
 		button.connect("mouse_entered", self, "mouse_interaction", [button, "entered"])
-		
-	var file = File.new()
-	if file.file_exists(data_management.save_path):
-		continue_button.disabled = false
-#		continue_button.modulate.a = 1.0
-		return
-		
-	continue_button.modulate.a = 0.5
+	
+	has_save()
 	
 func on_button_pressed(button_name: String) -> void:
 #	print(button_name)
 	match button_name:
 		"Play":
-			var _change_scene: bool = get_tree().change_scene("res://scenes/management/Level.tscn")
+			button_container.hide()
+			skin_select.show()
 			pass
 		"Continue":
 			var _change_scene: bool = get_tree().change_scene("res://scenes/management/Level.tscn")
 			pass
 		"Quit":
 			get_tree().quit()
-	pass
+			
+		"BackButton":
+			skin_select.hide()
+			button_container.show()
+			
+	reset()
+	
+	
 func mouse_interaction(button: Button, type: String) -> void:
 	if button.disabled:
 		return
@@ -46,4 +49,18 @@ func mouse_interaction(button: Button, type: String) -> void:
 			button.modulate.a = 0.5
 			pass
 		
-	pass
+	
+func reset() -> void:
+	for button in get_tree().get_nodes_in_group("button"):
+		mouse_interaction(button, "exited")
+#	has_save()
+		
+func has_save() -> void:
+	var file = File.new()
+	if file.file_exists(data_management.save_path):
+		continue_button.disabled = false
+#		continue_button.modulate.a = 1.0
+		return
+		
+	continue_button.modulate.a = 0.5
+	

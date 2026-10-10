@@ -1,14 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/env/Background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/font/thaleah_fat.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scripts/interface/initial_screen.gd" type="Script" id=3]
+[ext_resource path="res://assets/player/char_green.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/char_red.png" type="Texture" id=5]
+[ext_resource path="res://assets/player/char_purple.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/char_blue.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 2 )
 
 [node name="InitialScreen" type="Control"]
@@ -150,5 +157,95 @@ custom_fonts/font = SubResource( 2 )
 text = "Back
 
 "
+align = 2
+valign = 1
+
+[node name="Skincontainer" type="HBoxContainer" parent="SkinSelect"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -114.0
+margin_top = -100.0
+margin_right = 114.0
+margin_bottom = -20.0
+
+[node name="Blue" type="Button" parent="SkinSelect/Skincontainer" groups=["button"]]
+margin_right = 54.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 54, 80 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Blue" type="TextureRect" parent="SkinSelect/Skincontainer/Blue"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 2
+
+[node name="Green" type="Button" parent="SkinSelect/Skincontainer" groups=["button"]]
+margin_left = 58.0
+margin_right = 112.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 54, 80 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Green" type="TextureRect" parent="SkinSelect/Skincontainer/Green"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 2
+
+[node name="Purple" type="Button" parent="SkinSelect/Skincontainer" groups=["button"]]
+margin_left = 116.0
+margin_right = 170.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 54, 80 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Purple" type="TextureRect" parent="SkinSelect/Skincontainer/Purple"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 2
+
+[node name="Red" type="Button" parent="SkinSelect/Skincontainer" groups=["button"]]
+margin_left = 174.0
+margin_right = 228.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 54, 80 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Red" type="TextureRect" parent="SkinSelect/Skincontainer/Red"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 2
+
+[node name="Placeholdertext" type="Label" parent="SkinSelect"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -72.5
+margin_top = -25.0
+margin_right = 72.5
+margin_bottom = -10.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 3 )
+text = "Please select a skin"
 align = 2
 valign = 1

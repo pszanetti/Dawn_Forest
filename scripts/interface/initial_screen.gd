@@ -25,8 +25,9 @@ func on_button_pressed(button_name: String) -> void:
 			skin_select.show()
 			pass
 		"Continue":
-			var _change_scene: bool = get_tree().change_scene("res://scenes/management/Level.tscn")
-			pass
+			transition_screen.scene_path = "res://scenes/management/Level.tscn"
+			transition_screen.fade_in()
+			
 		"Quit":
 			get_tree().quit()
 			
@@ -79,7 +80,8 @@ func has_save() -> void:
 	
 func send_skin_and_start_game(skin: String) -> void:
 	data_management.data_dictionary.player_texture = skin
-	var _change_scene: bool = get_tree().change_scene("res://scenes/management/Level.tscn")
+	transition_screen.scene_path = "res://scenes/management/Level.tscn"
+	transition_screen.fade_in()
 	data_management.save_data()
 	pass
 

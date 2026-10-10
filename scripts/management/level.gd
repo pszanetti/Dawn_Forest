@@ -5,7 +5,8 @@ class_name Level
 # Carregando o Player e seus atributos
 onready var player: KinematicBody2D = get_node("Player")
 
-
+# Variável responsável de guardar a cena
+export(String) var scene_path
 
 func _ready() -> void:
 	var _game_over = player.get_node("Texture").connect("game_over", self, "on_game_over")
@@ -33,6 +34,9 @@ func on_game_over() -> void:
 	data_management.data_dictionary.weapon_container = []
 	data_management.data_dictionary.armor_container = []
 	data_management.save_data()
-	var _reload = get_tree().reload_current_scene()
+	
+	# Chama a cena de transição
+	transition_screen.scene_path = scene_path
+	transition_screen.fade_in()
 	
 	

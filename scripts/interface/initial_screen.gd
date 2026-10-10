@@ -4,6 +4,8 @@ onready var menu: Control = get_node("Menu")
 
 onready var button_container: VBoxContainer = get_node("Menu/ButtonContainer")
 
+onready var continue_button: Button = button_container.get_node("Continue")
+
 
 func _ready() -> void:
 	# Conectando os sinais
@@ -11,6 +13,14 @@ func _ready() -> void:
 		button.connect("pressed", self, "on_button_pressed", [button.name])
 		button.connect("mouse_exited", self, "mouse_interaction", [button, "exited"])
 		button.connect("mouse_entered", self, "mouse_interaction", [button, "entered"])
+		
+	var file = File.new()
+	if file.file_exists(data_management.save_path):
+		continue_button.disabled = false
+#		continue_button.modulate.a = 1.0
+		return
+		
+	continue_button.modulate.a = 0.5
 	
 func on_button_pressed(button_name: String) -> void:
 #	print(button_name)
@@ -19,12 +29,15 @@ func on_button_pressed(button_name: String) -> void:
 			var _change_scene: bool = get_tree().change_scene("res://scenes/management/Level.tscn")
 			pass
 		"Continue":
-			
+			var _change_scene: bool = get_tree().change_scene("res://scenes/management/Level.tscn")
 			pass
 		"Quit":
 			get_tree().quit()
 	pass
 func mouse_interaction(button: Button, type: String) -> void:
+	if button.disabled:
+		return
+		
 	match type:
 		"exited":
 			button.modulate.a = 1.0

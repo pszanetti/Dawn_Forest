@@ -34,6 +34,19 @@ func on_button_pressed(button_name: String) -> void:
 			skin_select.hide()
 			button_container.show()
 			
+		"Blue":
+			send_skin_and_start_game("res://assets/player/char_blue.png")
+			pass
+		"Green":
+			send_skin_and_start_game("res://assets/player/char_green.png")
+			pass
+		"Purple":
+			send_skin_and_start_game("res://assets/player/char_purple.png")
+			pass
+		"Red":
+			send_skin_and_start_game("res://assets/player/char_red.png")
+			pass
+			
 	reset()
 	
 	
@@ -64,3 +77,9 @@ func has_save() -> void:
 		
 	continue_button.modulate.a = 0.5
 	
+func send_skin_and_start_game(skin: String) -> void:
+	data_management.data_dictionary.player_texture = skin
+	var _change_scene: bool = get_tree().change_scene("res://scenes/management/Level.tscn")
+	data_management.save_data()
+	pass
+

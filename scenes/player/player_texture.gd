@@ -13,25 +13,13 @@ var suffix: String = "_right"
 var shield_off: bool = false
 var crouch_off: bool = false
 # Aqui eu pego o path e altero a variável animation para guardar o 
-var texture_list: Array = [
-	"res://assets/player/char_blue.png",
-	"res://assets/player/char_green.png",
-	"res://assets/player/char_purple.png",
-	"res://assets/player/char_red.png"
-	]
-	
 
 func _ready() -> void:
-	randomize()
+	
 	data_management.load_data()
 	if data_management.data_dictionary.player_texture != "":
 		texture = load(data_management.data_dictionary.player_texture)
 		return
-		
-	var random_index: int = randi() % texture_list.size()
-	texture = load(texture_list[random_index])
-	data_management.data_dictionary.player_texture = texture_list[random_index]
-	data_management.save_data()
 
 # Guarda o acesso ao node Animation na variável animation que fica sendo o AnimationPlayer
 export(NodePath) onready var animation = get_node(animation) as AnimationPlayer

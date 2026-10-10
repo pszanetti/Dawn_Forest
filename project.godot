@@ -225,6 +225,7 @@ config/icon="res://icon.png"
 [autoload]
 
 data_management="*res://scripts/interface/player/data_management.gd"
+transition_screen="*res://scenes/management/transition_screen.tscn"
 
 [display]
 

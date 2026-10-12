@@ -14,12 +14,21 @@ onready var timer: Timer = get_node("Timer")
 var dialog_size: int
 var dialog_index: int = 0
 
-var dialog_list: Dictionary = {}
+var dialog_list: Dictionary = {
+	"dialog": [
+		"Ola aventureiro, voce deve ter viajado muitas e muitas leguas para estar aqui. Gostaria muito de saber por onde voce esteve e por quais aventuras passou",
+		"Em que posso te ajudar ?"
+		],
+		"portrait": null,
+		"name": ""
+}
 
 export(float) var wait_time = 0.02
 
 func _ready() -> void:
-	dialog_size = dialog_list["dialog"].size
+	animation.play("fade_in")
+	yield(animation, "animation_finished")
+	dialog_size = dialog_list["dialog"].size()
 	
 	if dialog_list["portrait"] != null:
 		label_name.text = dialog_list["name"]
@@ -29,9 +38,25 @@ func _ready() -> void:
 	show_dialog()
 	
 func show_dialog() -> void:
+	if dialog_index == dialog_size:
+		animation.play("fade_out")
+		yield(animation, "animation_finished")
+		emit_signal("finished")
+		queue_free()
+		return
+	# Reseta o diálogo atual
+	text_label.percent_visible = 0
+	text_label.text = dialog_list["dialog"][dialog_index]
+	# Passa ṕpara a próxima frase
+	dialog_index += 1
+	# Enquanto a text_label for menor que o tamanho da dialog_list
+	while text_label.visible_characters < len(text_label.text):
+		# Acresce a quantidade de caracteres viviveis por 1
+		text_label.visible_characters += 1
+		timer.start(wait_time)
+		yield(timer, "timeout")
+		
 	
-	pass
-		pass
-	pass
+
 
 

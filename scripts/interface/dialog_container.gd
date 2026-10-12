@@ -14,6 +14,9 @@ onready var timer: Timer = get_node("Timer")
 var dialog_size: int
 var dialog_index: int = 0
 
+# Pular dialogo
+var can_skip_dialog: bool = false
+
 var dialog_list: Dictionary = {
 	"dialog": [
 		"Ola aventureiro, voce deve ter viajado muitas e muitas leguas para estar aqui. Gostaria muito de saber por onde voce esteve e por quais aventuras passou",
@@ -37,7 +40,15 @@ func _ready() -> void:
 		
 	show_dialog()
 	
+# Fazendo trocar a frase na caixa de diálogo
+func _process(_delta) -> void:
+	if Input.is_action_just_pressed("interact") and can_skip_dialog:
+		can_skip_dialog = false
+		show_dialog()
+	
+	
 func show_dialog() -> void:
+	# Caso as frases terminem ele fecha o DialogContainer
 	if dialog_index == dialog_size:
 		animation.play("fade_out")
 		yield(animation, "animation_finished")
@@ -56,7 +67,8 @@ func show_dialog() -> void:
 		timer.start(wait_time)
 		yield(timer, "timeout")
 		
-	
+	# Quando chegar no final da frase poderá mudar para a próxima frase
+	can_skip_dialog = true
 
 
 

@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/interface/player/inventory/equipment_container.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/interface/player/stats/stats_container.tscn" type="PackedScene" id=5]
 
-[node name="Hud" type="CanvasLayer"]
+[node name="Hud" type="CanvasLayer" groups=["hud"]]
 script = ExtResource( 3 )
 
 [node name="StatsContainer" parent="." groups=["stats_hud"] instance=ExtResource( 5 )]

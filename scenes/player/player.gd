@@ -183,3 +183,8 @@ func _exit_tree():
 	
 	data_management.data_dictionary.player_position = global_position
 	data_management.save_data()
+
+func reset(state: bool):
+	set_physics_process(not state)
+	$Animation.play("idle")
+	pass

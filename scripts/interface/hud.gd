@@ -61,3 +61,6 @@ func show_stats() -> void:
 func hide_equipment_container() -> void:
 	equipment_container.animtaion.play("hide_container")
 	
+func spawn_dialog(interactable, dialog_list: Dictionary) -> void:
+	
+	pass

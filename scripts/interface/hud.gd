@@ -10,6 +10,9 @@ onready var stats_container: Control = get_node("StatsContainer")
 # Guarda referência ao EquipamentContainer
 onready var equipment_container = get_node("EquipamentContainer")
 
+# Carrega o dialog_container
+const DIALOG_CONTAINER: PackedScene = preload("res://scenes/interface/general/dialog_container.tscn")
+
 func _process(_delta) -> void:
 	if can_show_container:
 		show_inventory()
@@ -62,5 +65,14 @@ func hide_equipment_container() -> void:
 	equipment_container.animtaion.play("hide_container")
 	
 func spawn_dialog(interactable, dialog_list: Dictionary) -> void:
-	
+#	print(dialog_list)
+# 	Criação de uma instancia do dialog containe
+	var dialog = DIALOG_CONTAINER.instance()
+	# Conecta o sinal finished do dialog_container com o 
+	# interactable do shop na função on_dialog_finished
+	dialog.connect("finished", interactable, "on_dialog_finished")
+	# atualiza a dialog_list pelo valor recebido aqui
+	dialog.dialog_list = dialog_list
+	# Adiciona a instancia do dialog_container.tscn
+	add_child(dialog)
 	pass

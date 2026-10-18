@@ -35,8 +35,8 @@ func _ready() -> void:
 	
 	if dialog_list["portrait"] != null:
 		label_name.text = dialog_list["name"]
-		text_label.rect_position = Vector2(47, 24)
-		portrait.texture = load(dialog_list[portrait])
+		text_label.rect_position = Vector2(60, 24)
+		portrait.texture = load(dialog_list["portrait"])
 		
 	show_dialog()
 	

@@ -76,6 +76,18 @@ func horizontal_movement_env() -> void:
 		return    # -> o return serve para não rodar o código que está abaixo, saindo assim da função
 	velocity.x = input_direction * speed
 	# IMPORTANTE -> animate será um metódo criado no script em Texture !!!
+	var dir: String = "none"
+	var process: bool = false
+	if velocity.x > 0:
+		dir = "right"
+		process = true
+	elif velocity.x < 0:
+		dir = "left"
+		process = true
+	else:
+		dir = "none"
+		process = false
+	get_tree().call_group("parallax", "direction", dir, process)
 	player_sprite.animate(velocity)   #IMPORTANTE ESSA LINHA SUMIU !?
 
 func vertical_movement_env() -> void:

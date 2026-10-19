@@ -7,7 +7,7 @@
 [ext_resource path="res://scripts/env/Background.gd" type="Script" id=5]
 [ext_resource path="res://scenes/env/mask.tscn" type="PackedScene" id=6]
 
-[node name="ParallaxBackground" type="ParallaxBackground"]
+[node name="ParallaxBackground" type="ParallaxBackground" groups=["parallax"]]
 script = ExtResource( 5 )
 layer_speed = [ 20, 15, 10, 5 ]
 
